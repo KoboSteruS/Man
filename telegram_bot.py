@@ -51,35 +51,52 @@ def save_chat_id(chat_id: int) -> None:
 def send_lead(name: str, phone: str, email: str = "", message: str = "") -> bool:
     """
     Отправляет заявку в Telegram. Использует сохранённый chat_id.
+    Все поля экранируются для безопасной вставки в HTML.
     Возвращает True при успехе.
     """
     chat_id = get_chat_id()
     if not chat_id:
         return False
 
+    # Гарантированно строки и экранирование (защита от инъекций)
+    name = _escape(_to_str(name))
+    phone = _escape(_to_str(phone))
+    email = _escape(_to_str(email)) if email else ""
+    message = _escape(_to_str(message)) if message else ""
+
     lines = [
         "🆕 <b>Новая заявка с сайта</b>",
         "",
-        f"<b>Имя:</b> {_escape(name)}",
-        f"<b>Телефон:</b> {_escape(phone)}",
+        f"<b>Имя:</b> {name}",
+        f"<b>Телефон:</b> {phone}",
     ]
     if email:
-        lines.append(f"<b>Email:</b> {_escape(email)}")
+        lines.append(f"<b>Email:</b> {email}")
     if message:
-        lines.append(f"<b>Сообщение:</b> {_escape(message)}")
+        lines.append(f"<b>Сообщение:</b> {message}")
 
     text = "\n".join(lines)
     out = _api("sendMessage", chat_id=chat_id, text=text, parse_mode="HTML")
     return out is not None and out.get("ok") is True
 
 
+def _to_str(value: str) -> str:
+    """Приводит к строке, обрезает по длине для защиты от переполнения."""
+    s = str(value).strip() if value is not None else ""
+    return s[:5000]  # лимит на одно поле в сообщении
+
+
 def _escape(s: str) -> str:
-    """Экранирует HTML для Telegram."""
+    """Экранирует HTML для Telegram (защита от тегов и инъекций)."""
+    if not s:
+        return ""
     return (
         str(s)
         .replace("&", "&amp;")
         .replace("<", "&lt;")
         .replace(">", "&gt;")
+        .replace('"', "&quot;")
+        .replace("'", "&#39;")
     )
 
 

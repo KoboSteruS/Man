@@ -5,7 +5,6 @@
 (function () {
   'use strict';
 
-  var GALLERY_SIZE = 6;
   var HEADER_SCROLL_THRESHOLD = 50;
 
   // ---------- Header scroll (throttled) ----------
@@ -24,53 +23,6 @@
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     updateHeader();
-  }
-
-  // ---------- Gallery carousel ----------
-  var galleryTrack = document.getElementById('gallery-track');
-  var galleryPrev = document.getElementById('gallery-prev');
-  var galleryNext = document.getElementById('gallery-next');
-  var galleryDots = document.getElementById('gallery-dots');
-  var galleryCurrentIndex = 0;
-
-  function setGalleryIndex(index) {
-    galleryCurrentIndex = (index + GALLERY_SIZE) % GALLERY_SIZE;
-    if (galleryTrack) {
-      var offset = galleryCurrentIndex * (100 / 6);
-      galleryTrack.style.transform = 'translateX(-' + offset + '%)';
-    }
-    if (galleryDots) {
-      var dots = galleryDots.querySelectorAll('.gallery__dot');
-      dots.forEach(function (dot, i) {
-        dot.classList.toggle('is-active', i === galleryCurrentIndex);
-        dot.setAttribute('aria-current', i === galleryCurrentIndex ? 'true' : 'false');
-      });
-    }
-    var cards = document.querySelectorAll('.gallery__card');
-    var centerIndex = (galleryCurrentIndex + 1) % GALLERY_SIZE;
-    cards.forEach(function (card) {
-      var idx = parseInt(card.getAttribute('data-index'), 10);
-      card.classList.toggle('gallery__card--center', idx === centerIndex);
-    });
-  }
-
-  if (galleryPrev) {
-    galleryPrev.addEventListener('click', function () {
-      setGalleryIndex(galleryCurrentIndex - 1);
-    });
-  }
-  if (galleryNext) {
-    galleryNext.addEventListener('click', function () {
-      setGalleryIndex(galleryCurrentIndex + 1);
-    });
-  }
-  if (galleryDots) {
-    galleryDots.addEventListener('click', function (e) {
-      var btn = e.target.closest('.gallery__dot');
-      if (btn && btn.dataset.index !== undefined) {
-        setGalleryIndex(parseInt(btn.dataset.index, 10));
-      }
-    });
   }
 
   // ---------- Gallery like buttons ----------

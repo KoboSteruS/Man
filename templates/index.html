@@ -199,24 +199,72 @@
             <div class="bank-carousel__track-wrap">
               <div class="bank-carousel__track" id="bank-track" aria-hidden="true">
                 <div class="bank-carousel__list">
-                  <div class="bank-card" style="--bank-color:#21A038;--bank-text:#fff"><span>С</span> Сбербанк</div>
-                  <div class="bank-card" style="--bank-color:#0D2C75;--bank-text:#fff"><span>В</span> ВТБ</div>
-                  <div class="bank-card" style="--bank-color:#E30613;--bank-text:#fff"><span>Р</span> Росбанк</div>
-                  <div class="bank-card" style="--bank-color:#00558B;--bank-text:#fff"><span>У</span> Уралсиб</div>
-                  <div class="bank-card" style="--bank-color:#FFED00;--bank-text:#000"><span>Р</span> Райффайзен</div>
-                  <div class="bank-card" style="--bank-color:#00944A;--bank-text:#fff"><span>РСХ</span> РосСельхозБанк</div>
-                  <div class="bank-card" style="--bank-color:#0066B3;--bank-text:#fff"><span>Г</span> Газпромбанк</div>
-                  <div class="bank-card" style="--bank-color:#005BAA;--bank-text:#fff"><span>СБ</span> Связь-Банк</div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/SBER.png') }}" alt="Сбербанк" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Сбербанк</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/VTB.png') }}" alt="ВТБ" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">ВТБ</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/rosbank.png') }}" alt="Росбанк" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Росбанк</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/URALSLIB.png') }}" alt="Уралсиб" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Уралсиб</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/raiffeisen.png') }}" alt="Райффайзен" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Райффайзен</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/RSHB.png') }}" alt="РосСельхозБанк" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">РосСельхозБанк</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/GAZPROM.png') }}" alt="Газпромбанк" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Газпромбанк</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/svyaz-bank.png') }}" alt="Связь-Банк" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Связь-Банк</span>
+                  </div>
                 </div>
                 <div class="bank-carousel__list" aria-hidden="true">
-                  <div class="bank-card" style="--bank-color:#21A038;--bank-text:#fff"><span>С</span> Сбербанк</div>
-                  <div class="bank-card" style="--bank-color:#0D2C75;--bank-text:#fff"><span>В</span> ВТБ</div>
-                  <div class="bank-card" style="--bank-color:#E30613;--bank-text:#fff"><span>Р</span> Росбанк</div>
-                  <div class="bank-card" style="--bank-color:#00558B;--bank-text:#fff"><span>У</span> Уралсиб</div>
-                  <div class="bank-card" style="--bank-color:#FFED00;--bank-text:#000"><span>Р</span> Райффайзен</div>
-                  <div class="bank-card" style="--bank-color:#00944A;--bank-text:#fff"><span>РСХ</span> РосСельхозБанк</div>
-                  <div class="bank-card" style="--bank-color:#0066B3;--bank-text:#fff"><span>Г</span> Газпромбанк</div>
-                  <div class="bank-card" style="--bank-color:#005BAA;--bank-text:#fff"><span>СБ</span> Связь-Банк</div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/SBER.png') }}" alt="Сбербанк" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Сбербанк</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/VTB.png') }}" alt="ВТБ" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">ВТБ</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/rosbank.png') }}" alt="Росбанк" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Росбанк</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/URALSLIB.png') }}" alt="Уралсиб" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Уралсиб</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/raiffeisen.png') }}" alt="Райффайзен" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Райффайзен</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/RSHB.png') }}" alt="РосСельхозБанк" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">РосСельхозБанк</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/GAZPROM.png') }}" alt="Газпромбанк" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Газпромбанк</span>
+                  </div>
+                  <div class="bank-card">
+                    <img src="{{ url_for('static', filename='img/banks/svyaz-bank.png') }}" alt="Связь-Банк" class="bank-card__img" width="56" height="56" loading="lazy" />
+                    <span class="bank-card__name">Связь-Банк</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -235,15 +283,8 @@
             <p class="section__lead">Актуальные объекты недвижимости в Карелии и за рубежом</p>
           </div>
           <div class="gallery">
-            <button type="button" class="gallery__nav gallery__nav--prev" id="gallery-prev" aria-label="Предыдущий слайд">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button type="button" class="gallery__nav gallery__nav--next" id="gallery-next" aria-label="Следующий слайд">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-            <div class="gallery__slides" id="gallery-slides">
-              <div class="gallery__track" id="gallery-track">
-              <div class="gallery__card gallery__card--center" data-index="0">
+            <div class="gallery__grid">
+              <div class="gallery__card">
                 <div class="gallery__card-img-wrap">
                   <img src="https://images.unsplash.com/photo-1652349566508-457d0565463c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="3-комнатная квартира в центре" loading="lazy" decoding="async" />
                   <div class="gallery__card-overlay"></div>
@@ -258,7 +299,7 @@
                   <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">4 500 000 ₽</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
                 </div>
               </div>
-              <div class="gallery__card" data-index="1">
+              <div class="gallery__card">
                 <div class="gallery__card-img-wrap">
                   <img src="https://images.unsplash.com/photo-1759889392274-246af1a984ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Коттедж с участком" loading="lazy" decoding="async" />
                   <div class="gallery__card-overlay"></div>
@@ -272,7 +313,7 @@
                   <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">8 900 000 ₽</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
                 </div>
               </div>
-              <div class="gallery__card" data-index="2">
+              <div class="gallery__card">
                 <div class="gallery__card-img-wrap">
                   <img src="https://images.unsplash.com/photo-1722931331109-a200a74b39d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Участок под ИЖС у озера" loading="lazy" decoding="async" />
                   <div class="gallery__card-overlay"></div>
@@ -286,7 +327,7 @@
                   <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">1 200 000 ₽</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
                 </div>
               </div>
-              <div class="gallery__card" data-index="3">
+              <div class="gallery__card">
                 <div class="gallery__card-img-wrap">
                   <img src="https://images.unsplash.com/photo-1760611656071-a8bef0578874?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Пентхаус с панорамным видом" loading="lazy" decoding="async" />
                   <div class="gallery__card-overlay"></div>
@@ -301,7 +342,7 @@
                   <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">12 500 000 ₽</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
                 </div>
               </div>
-              <div class="gallery__card" data-index="4">
+              <div class="gallery__card">
                 <div class="gallery__card-img-wrap">
                   <img src="https://images.unsplash.com/photo-1728486887514-9e2f693902d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Элитная вилла с бассейном" loading="lazy" decoding="async" />
                   <div class="gallery__card-overlay"></div>
@@ -315,7 +356,7 @@
                   <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">€250 000</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
                 </div>
               </div>
-              <div class="gallery__card" data-index="5">
+              <div class="gallery__card">
                 <div class="gallery__card-img-wrap">
                   <img src="https://images.unsplash.com/photo-1769504574886-8fc9e4e554e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Современная студия" loading="lazy" decoding="async" />
                   <div class="gallery__card-overlay"></div>
@@ -329,15 +370,6 @@
                   <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">2 800 000 ₽</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
                 </div>
               </div>
-              </div>
-            </div>
-            <div class="gallery__dots" id="gallery-dots" role="tablist" aria-label="Выбор слайда">
-              <button type="button" class="gallery__dot is-active" data-index="0" aria-label="Слайд 1"></button>
-              <button type="button" class="gallery__dot" data-index="1" aria-label="Слайд 2"></button>
-              <button type="button" class="gallery__dot" data-index="2" aria-label="Слайд 3"></button>
-              <button type="button" class="gallery__dot" data-index="3" aria-label="Слайд 4"></button>
-              <button type="button" class="gallery__dot" data-index="4" aria-label="Слайд 5"></button>
-              <button type="button" class="gallery__dot" data-index="5" aria-label="Слайд 6"></button>
             </div>
           </div>
           <div class="cta-banner cta-banner--blue">
