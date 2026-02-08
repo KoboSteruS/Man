@@ -1,0 +1,9 @@
+# Сгенерировано ботом при первом /start
+.telegram_chat_id
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
