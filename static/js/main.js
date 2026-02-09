@@ -126,4 +126,15 @@
     });
   }
 
+  // ---------- Fallback для фото: если локальный файл не найден (404), подставить data-fallback ----------
+  document.querySelectorAll('img[data-fallback]').forEach(function (img) {
+    img.addEventListener('error', function () {
+      var fallback = this.getAttribute('data-fallback');
+      if (fallback) {
+        this.removeAttribute('data-fallback');
+        this.src = fallback;
+      }
+    });
+  });
+
 })();
