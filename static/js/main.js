@@ -25,6 +25,39 @@
     updateHeader();
   }
 
+  // ---------- Mobile menu (burger) ----------
+  var burger = document.getElementById('header-burger');
+  var mobileMenu = document.getElementById('header-mobile-menu');
+  if (burger && mobileMenu) {
+    function openMenu() {
+      header.classList.add('is-open');
+      burger.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      header.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    burger.addEventListener('click', function () {
+      if (header.classList.contains('is-open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+    mobileMenu.querySelectorAll('.header__mobile-link, .header__mobile-phone, .header__mobile-cta').forEach(function (link) {
+      link.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && header.classList.contains('is-open')) {
+        closeMenu();
+      }
+    });
+  }
+
   // ---------- Gallery like buttons ----------
   var likedIds = JSON.parse(localStorage.getItem('gallery-liked') || '[]');
 
