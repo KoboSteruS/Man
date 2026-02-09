@@ -1,0 +1,47 @@
+Ссылки на фото Unsplash для скачивания
+Сохраните каждый файл в указанную папку с указанным именем.
+
+--- Hero (фон главного экрана) ---
+Сохранить как: hero/bg.jpg
+
+https://images.unsplash.com/photo-1769504574886-8fc9e4e554e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080
+
+
+--- О компании (3 фото) ---
+Сохранить как: about/1.jpg
+
+https://images.unsplash.com/photo-1587771518560-d4e96de71240?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080
+
+Сохранить как: about/2.jpg
+
+https://images.unsplash.com/photo-1715985160053-d339e8b6eb94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg
+
+Сохранить как: about/3.jpg
+
+https://images.unsplash.com/photo-1758523671893-0ba21cf4260f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg
+
+
+--- Галерея недвижимости (6 фото) ---
+Сохранить как: gallery/1.jpg
+
+https://images.unsplash.com/photo-1652349566508-457d0565463c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg
+
+Сохранить как: gallery/2.jpg
+
+https://images.unsplash.com/photo-1759889392274-246af1a984ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg
+
+Сохранить как: gallery/3.jpg
+
+https://images.unsplash.com/photo-1722931331109-a200a74b39d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg
+
+Сохранить как: gallery/4.jpg
+
+https://images.unsplash.com/photo-1760611656071-a8bef0578874?crop=entropy&cs=tinysrgb&fit=max&fm=jpg
+
+Сохранить как: gallery/5.jpg
+
+https://images.unsplash.com/photo-1728486887514-9e2f693902d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg
+
+Сохранить как: gallery/6.jpg
+
+https://images.unsplash.com/photo-1769504574886-8fc9e4e554e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg
