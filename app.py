@@ -24,10 +24,13 @@ if os.path.isfile(_env_path):
                 if _k and _k not in os.environ:
                     os.environ[_k] = _v
 
+from pathlib import Path
+
 from flask import Flask, render_template, request, jsonify
 
 from admin_auth import verify_admin_token, JWT_SECRET
 from content import get_default_keys, load_content, save_content
+from uploads import save_uploaded_image, get_content_key, UPLOAD_SLOTS
 from security import (
     validate_name,
     validate_phone,
@@ -92,6 +95,26 @@ def admin_save(token: str):
     if save_content(cleaned):
         return jsonify({"ok": True})
     return jsonify({"ok": False, "error": "Не удалось сохранить"}), 500
+
+
+@app.route("/<token>/admin/upload", methods=["POST"])
+def admin_upload(token: str):
+    """Загрузка изображения в слот (Hero, О нас, Галерея). Обновляет content с новым именем файла."""
+    if not verify_admin_token(token):
+        return jsonify({"ok": False, "error": "Неверный или просроченный токен"}), 403
+    slot = (request.form.get("slot") or "").strip()
+    if slot not in UPLOAD_SLOTS:
+        return jsonify({"ok": False, "error": "Неверный слот"}), 400
+    file_storage = request.files.get("file")
+    static_root = Path(app.root_path) / "static"
+    ok, filename, err = save_uploaded_image(slot, file_storage, static_root)
+    if not ok:
+        return jsonify({"ok": False, "error": err or "Ошибка загрузки"}), 400
+    content = load_content()
+    content[get_content_key(slot)] = filename
+    if save_content(content):
+        return jsonify({"ok": True, "filename": filename})
+    return jsonify({"ok": False, "error": "Файл загружен, но не удалось обновить контент"}), 500
 
 
 @app.route("/api/send-lead", methods=["POST"])

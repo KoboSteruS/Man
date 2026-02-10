@@ -22,6 +22,13 @@
     .btn--primary:hover { background: #b91c1c; }
     .admin__msg { font-size: 0.875rem; color: #059669; }
     .admin__msg.error { color: #dc2626; }
+    .admin__upload { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+    .admin__upload-preview { width: 120px; height: 80px; object-fit: cover; border-radius: 0.375rem; border: 1px solid #e5e7eb; }
+    .admin__upload-controls { flex: 1; min-width: 200px; }
+    .admin__upload-controls input[type=file] { margin-bottom: 0.5rem; font-size: 0.875rem; }
+    .admin__upload-controls .btn--small { padding: 0.375rem 0.75rem; font-size: 0.875rem; }
+    .admin__slot { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; }
+    .admin__slot:last-child { border-bottom: none; }
   </style>
 </head>
 <body>
@@ -50,6 +57,14 @@
 
       <div class="admin__section">
         <h2>Hero (главный экран)</h2>
+        <div class="admin__upload admin__slot">
+          <img class="admin__upload-preview" id="preview-hero_bg" src="{{ url_for('static', filename='img/hero/' ~ content.get('hero_image', 'hero_bg.png')) }}" alt="Hero" />
+          <div class="admin__upload-controls">
+            <input type="file" id="file-hero_bg" accept="image/jpeg,image/png" />
+            <button type="button" class="btn btn--primary btn--small" data-upload-slot="hero_bg">Заменить фото</button>
+            <span class="admin__msg" id="msg-hero_bg" aria-live="polite"></span>
+          </div>
+        </div>
         <div class="admin__grid">
           <div><label for="hero_badge">Бейдж</label><input type="text" id="hero_badge" name="hero_badge" value="{{ content.get('hero_badge', '') }}" /></div>
           <div><label for="hero_title">Заголовок</label><input type="text" id="hero_title" name="hero_title" value="{{ content.get('hero_title', '') }}" /></div>
@@ -60,6 +75,40 @@
 
       <div class="admin__section">
         <h2>О компании</h2>
+        <div class="admin__slot">
+          <p style="font-size:0.875rem; color:#6b7280; margin-bottom:0.5rem;">Фото блока «О нас» (под каждым — подпись)</p>
+          <div class="admin__upload">
+            <img class="admin__upload-preview" id="preview-about1" src="{{ url_for('static', filename='img/about/' ~ content.get('about1_image', 'about1.png')) }}" alt="О нас 1" />
+            <div class="admin__upload-controls">
+              <input type="file" id="file-about1" accept="image/jpeg,image/png" />
+              <button type="button" class="btn btn--primary btn--small" data-upload-slot="about1">Заменить</button>
+              <span class="admin__msg" id="msg-about1" aria-live="polite"></span>
+            </div>
+          </div>
+          <div style="margin-top:0.5rem;"><label for="about1_caption">Подпись под фото 1</label><input type="text" id="about1_caption" name="about1_caption" value="{{ content.get('about1_caption', '') }}" placeholder="Краткое описание" /></div>
+        </div>
+        <div class="admin__slot">
+          <div class="admin__upload">
+            <img class="admin__upload-preview" id="preview-about2" src="{{ url_for('static', filename='img/about/' ~ content.get('about2_image', 'about2.png')) }}" alt="О нас 2" />
+            <div class="admin__upload-controls">
+              <input type="file" id="file-about2" accept="image/jpeg,image/png" />
+              <button type="button" class="btn btn--primary btn--small" data-upload-slot="about2">Заменить</button>
+              <span class="admin__msg" id="msg-about2" aria-live="polite"></span>
+            </div>
+          </div>
+          <div style="margin-top:0.5rem;"><label for="about2_caption">Подпись под фото 2</label><input type="text" id="about2_caption" name="about2_caption" value="{{ content.get('about2_caption', '') }}" placeholder="Краткое описание" /></div>
+        </div>
+        <div class="admin__slot">
+          <div class="admin__upload">
+            <img class="admin__upload-preview" id="preview-about3" src="{{ url_for('static', filename='img/about/' ~ content.get('about3_image', 'about3.png')) }}" alt="О нас 3" />
+            <div class="admin__upload-controls">
+              <input type="file" id="file-about3" accept="image/jpeg,image/png" />
+              <button type="button" class="btn btn--primary btn--small" data-upload-slot="about3">Заменить</button>
+              <span class="admin__msg" id="msg-about3" aria-live="polite"></span>
+            </div>
+          </div>
+          <div style="margin-top:0.5rem;"><label for="about3_caption">Подпись под фото 3</label><input type="text" id="about3_caption" name="about3_caption" value="{{ content.get('about3_caption', '') }}" placeholder="Краткое описание" /></div>
+        </div>
         <div class="admin__grid">
           <div><label for="about_badge">Бейдж</label><input type="text" id="about_badge" name="about_badge" value="{{ content.get('about_badge', '') }}" /></div>
           <div><label for="about_title">Заголовок</label><input type="text" id="about_title" name="about_title" value="{{ content.get('about_title', '') }}" /></div>
@@ -81,6 +130,21 @@
 
       <div class="admin__section">
         <h2>Галерея и CTA</h2>
+        <p style="font-size:0.875rem; color:#6b7280; margin-bottom:1rem;">Фото галереи: под каждым — короткая подпись и дополнительный текст (отображаются внизу карточки).</p>
+        {% for i in [1, 2, 3, 4, 5, 6] %}
+        <div class="admin__slot">
+          <div class="admin__upload">
+            <img class="admin__upload-preview" id="preview-gallery{{ i }}" src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery' ~ i ~ '_image', 'gallery' ~ i ~ '.jpg')) }}" alt="Галерея {{ i }}" />
+            <div class="admin__upload-controls">
+              <input type="file" id="file-gallery{{ i }}" accept="image/jpeg,image/png" />
+              <button type="button" class="btn btn--primary btn--small" data-upload-slot="gallery{{ i }}">Заменить</button>
+              <span class="admin__msg" id="msg-gallery{{ i }}" aria-live="polite"></span>
+            </div>
+          </div>
+          <div style="margin-top:0.5rem;"><label for="gallery{{ i }}_caption">Подпись (коротко)</label><input type="text" id="gallery{{ i }}_caption" name="gallery{{ i }}_caption" value="{{ content.get('gallery' ~ i ~ '_caption', '') }}" placeholder="Например: Квартира в центре" /></div>
+          <div style="margin-top:0.5rem;"><label for="gallery{{ i }}_text">Текст под фото (подробнее)</label><textarea id="gallery{{ i }}_text" name="gallery{{ i }}_text" rows="2" placeholder="Дополнительное описание объекта">{{ content.get('gallery' ~ i ~ '_text', '') }}</textarea></div>
+        </div>
+        {% endfor %}
         <div class="admin__grid">
           <div><label for="gallery_badge">Бейдж галереи</label><input type="text" id="gallery_badge" name="gallery_badge" value="{{ content.get('gallery_badge', '') }}" /></div>
           <div><label for="gallery_title">Заголовок галереи</label><input type="text" id="gallery_title" name="gallery_title" value="{{ content.get('gallery_title', '') }}" /></div>
@@ -170,6 +234,43 @@
             msg.textContent = 'Ошибка сети';
             msg.classList.add('error');
           });
+      });
+
+      // Загрузка изображений по кнопке «Заменить фото»
+      document.querySelectorAll('[data-upload-slot]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var slot = this.getAttribute('data-upload-slot');
+          var input = document.getElementById('file-' + slot);
+          var preview = document.getElementById('preview-' + slot);
+          var msgEl = document.getElementById('msg-' + slot);
+          if (!input || !input.files || !input.files[0]) {
+            if (msgEl) { msgEl.textContent = 'Выберите файл (JPG или PNG)'; msgEl.classList.add('error'); }
+            return;
+          }
+          if (msgEl) { msgEl.textContent = 'Загрузка…'; msgEl.classList.remove('error'); }
+          var fd = new FormData();
+          fd.append('slot', slot);
+          fd.append('file', input.files[0]);
+          fetch('/' + encodeURIComponent(adminToken) + '/admin/upload', {
+            method: 'POST',
+            body: fd
+          })
+            .then(function(r) { return r.json().then(function(j) { return { status: r.status, body: j }; }); })
+            .then(function(res) {
+              if (res.status === 200 && res.body.ok && res.body.filename) {
+                var base = slot === 'hero_bg' ? 'hero' : (slot.indexOf('about') !== -1 ? 'about' : 'gallery');
+                var prefix = 'img/' + (base === 'hero' ? 'hero/' : base === 'about' ? 'about/' : 'gallery/');
+                preview.src = '/static/' + prefix + res.body.filename + '?t=' + Date.now();
+                if (msgEl) { msgEl.textContent = 'Загружено'; msgEl.classList.remove('error'); }
+                input.value = '';
+              } else {
+                if (msgEl) { msgEl.textContent = res.body.error || 'Ошибка загрузки'; msgEl.classList.add('error'); }
+              }
+            })
+            .catch(function() {
+              if (msgEl) { msgEl.textContent = 'Ошибка сети'; msgEl.classList.add('error'); }
+            });
+        });
       });
     })();
   </script>

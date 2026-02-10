@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ content.get('site_title', 'Московское Агентство Недвижимости — Петрозаводск, Карелия') }}</title>
-  <meta name="description" content="{{ content.get('site_description', 'Агентство недвижимости в Петрозаводске и Республике Карелия. Продажа, покупка, аренда, ипотека. На рынке с 1997 года.') }}" />
+  <title>{{ content.get('site_title', 'Московское Агентство Недвижимости — Петрозаводск, Карелия, Москва') }}</title>
+  <meta name="description" content="{{ content.get('site_description', 'Агентство недвижимости в Петрозаводске, Карелии и Москве. Продажа, покупка, аренда, ипотека. На рынке с 1997 года.') }}" />
   <link rel="icon" href="{{ url_for('static', filename='img/Logo.ico') }}" type="image/x-icon" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
@@ -51,7 +51,7 @@
       <!-- Hero -->
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero__bg">
-          <img src="{{ url_for('static', filename='img/hero/hero_bg.png') }}" alt="" class="hero__bg-img" width="1080" height="720" decoding="async" fetchpriority="high" data-fallback="https://images.unsplash.com/photo-1769504574886-8fc9e4e554e8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;q=80&amp;w=1080" />
+          <img src="{{ url_for('static', filename='img/hero/' ~ content.get('hero_image', 'hero_bg.png')) }}" alt="" class="hero__bg-img" width="1080" height="720" decoding="async" fetchpriority="high" />
           <div class="hero__overlay"></div>
         </div>
         <div class="hero__content">
@@ -63,7 +63,7 @@
             {{ content.get('hero_title', 'Найдём дом вашей') }} <span class="text-red">{{ content.get('hero_title_highlight', 'мечты') }}</span>
           </h1>
           <p class="hero__lead">
-            {{ content.get('hero_lead', 'Профессиональное агентство недвижимости в Петрозаводске и Республике Карелия') }}
+            {{ content.get('hero_lead', 'Профессиональное агентство недвижимости в Петрозаводске, Карелии и Москве') }}
           </p>
           <div class="hero__cta">
             <a href="#properties" class="btn btn--primary btn--lg btn--pill">
@@ -106,19 +106,22 @@
             <h2 id="about-title" class="section__title">
               {{ content.get('about_title', 'Мы знаем, что тепло и уют в Вашем доме – это главное') }}
             </h2>
-            <p class="section__lead">{{ content.get('about_lead', '27 лет помогаем людям находить дом мечты в Петрозаводске и Республике Карелия') }}</p>
+            <p class="section__lead">{{ content.get('about_lead', '27 лет помогаем людям находить дом мечты в Петрозаводске, Карелии и Москве') }}</p>
           </div>
           <div class="about__grid">
             <div class="about__media">
               <div class="about__images">
                 <div class="about__img about__img--large">
-                  <img src="{{ url_for('static', filename='img/about/about1.png') }}" alt="Современная недвижимость" width="800" height="320" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1587771518560-d4e96de71240?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;q=80&amp;w=1080" />
+                  <img src="{{ url_for('static', filename='img/about/' ~ content.get('about1_image', 'about1.png')) }}" alt="{{ content.get('about1_caption', 'Современная недвижимость') }}" width="800" height="320" loading="lazy" decoding="async" />
+                  {% if content.get('about1_caption') %}<p class="about__img-caption">{{ content.get('about1_caption') }}</p>{% endif %}
                 </div>
                 <div class="about__img">
-                  <img src="{{ url_for('static', filename='img/about/about2.png') }}" alt="Интерьер" width="400" height="192" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1715985160053-d339e8b6eb94?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+                  <img src="{{ url_for('static', filename='img/about/' ~ content.get('about2_image', 'about2.png')) }}" alt="{{ content.get('about2_caption', 'Интерьер') }}" width="400" height="192" loading="lazy" decoding="async" />
+                  {% if content.get('about2_caption') %}<p class="about__img-caption">{{ content.get('about2_caption') }}</p>{% endif %}
                 </div>
                 <div class="about__img">
-                  <img src="{{ url_for('static', filename='img/about/about3.png') }}" alt="Счастливые клиенты" width="400" height="192" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1758523671893-0ba21cf4260f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+                  <img src="{{ url_for('static', filename='img/about/' ~ content.get('about3_image', 'about3.png')) }}" alt="{{ content.get('about3_caption', 'Счастливые клиенты') }}" width="400" height="192" loading="lazy" decoding="async" />
+                  {% if content.get('about3_caption') %}<p class="about__img-caption">{{ content.get('about3_caption') }}</p>{% endif %}
                 </div>
               </div>
               <div class="about__floating-badge">
@@ -147,8 +150,8 @@
                 </div>
                 <div class="feature-card">
                   <svg class="feature-card__icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-                  <div class="feature-card__title">Карелия</div>
-                  <div class="feature-card__sub">и за границей</div>
+                  <div class="feature-card__title">За рубежом</div>
+                  <div class="feature-card__sub">Недвижимость за границей</div>
                 </div>
               </div>
             </div>
@@ -171,41 +174,41 @@
             <p class="section__lead">{{ content.get('services_lead', 'Осуществляем полный спектр риэлторских услуг с гарантией юридической чистоты') }}</p>
           </div>
           <div class="services__grid">
-            <div class="service-card">
+            <a href="#contact" class="service-card" aria-label="Продажа недвижимости — перейти к заявке">
               <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
               <h3 class="service-card__title">Продажа недвижимости</h3>
-              <p class="service-card__desc">Квартиры, дома, земельные участки, гаражи в Петрозаводске и Республике Карелия</p>
-            </div>
-            <div class="service-card service-card--featured" style="background-image: url('{{ url_for('static', filename='img/about/about1.png') }}');">
+              <p class="service-card__desc">Квартиры, дома, земельные участки, гаражи в Петрозаводске, Карелии и Москве</p>
+            </a>
+            <a href="#contact" class="service-card service-card--featured" style="background-image: url('{{ url_for('static', filename='img/about/about1.png') }}');" aria-label="Срочный выкуп — перейти к заявке">
               <div class="service-card__icon service-card__icon--featured"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
               <h3 class="service-card__title">Срочный выкуп</h3>
               <p class="service-card__desc">Быстро выкупим вашу недвижимость за рыночную цену. Оценка за 24 часа, расчёт в кратчайшие сроки</p>
-            </div>
-            <div class="service-card">
+            </a>
+            <a href="#contact" class="service-card" aria-label="Покупка недвижимости — перейти к заявке">
               <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
               <h3 class="service-card__title">Покупка недвижимости</h3>
               <p class="service-card__desc">Поможем найти идеальную недвижимость с учётом всех ваших требований</p>
-            </div>
-            <div class="service-card">
+            </a>
+            <a href="#contact" class="service-card" aria-label="Обмен — перейти к заявке">
               <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div>
               <h3 class="service-card__title">Обмен</h3>
               <p class="service-card__desc">Профессиональный подбор вариантов обмена с доплатой и без</p>
-            </div>
-            <div class="service-card">
+            </a>
+            <a href="#contact" class="service-card" aria-label="Аренда квартир — перейти к заявке">
               <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></div>
               <h3 class="service-card__title">Аренда квартир</h3>
               <p class="service-card__desc">Долгосрочная и краткосрочная аренда жилой недвижимости</p>
-            </div>
-            <div class="service-card">
+            </a>
+            <a href="#contact" class="service-card" aria-label="Ремонт квартир — перейти к заявке">
               <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 7h6m-3 3v6M5 7h4v10H5V7zm4-4v4M5 3h4"/><path d="M19 7v10h-4V7h4z"/></svg></div>
               <h3 class="service-card__title">Ремонт квартир</h3>
               <p class="service-card__desc">Подбор проверенных бригад, контроль качества и сроков. Ремонт под ключ</p>
-            </div>
-            <div class="service-card">
+            </a>
+            <a href="#contact" class="service-card" aria-label="Ипотека — перейти к заявке">
               <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><path d="M1 10h22"/></svg></div>
               <h3 class="service-card__title">Ипотека</h3>
               <p class="service-card__desc">Сотрудничество с 8 ведущими банками, выгодные условия кредитования</p>
-            </div>
+            </a>
           </div>
           <!-- Bank Carousel -->
           <div class="bank-carousel">
@@ -300,27 +303,51 @@
             <h2 id="properties-title" class="section__title">
               {{ content.get('gallery_title', 'Галерея лучших предложений') }}
             </h2>
-            <p class="section__lead">{{ content.get('gallery_lead', 'Актуальные объекты недвижимости в Карелии и за рубежом') }}</p>
+            <p class="section__lead">{{ content.get('gallery_lead', 'Актуальные объекты недвижимости в Петрозаводске, Карелии, Москве и за рубежом') }}</p>
           </div>
           <div class="gallery">
             <div class="gallery__grid">
               <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/gallery1.jpg') }}" alt="Недвижимость в Петрозаводске" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1652349566508-457d0565463c?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery1_image', 'gallery1.jpg')) }}" alt="{{ content.get('gallery1_caption', '') }}" loading="lazy" decoding="async" />
+                <figcaption class="gallery__caption-wrap">
+                  <span class="gallery__caption">{{ content.get('gallery1_caption', '') }}</span>
+                  {% if content.get('gallery1_text') %}<span class="gallery__text">{{ content.get('gallery1_text') }}</span>{% endif %}
+                </figcaption>
               </figure>
               <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/gallery2.jpg') }}" alt="Недвижимость в Карелии" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1759889392274-246af1a984ba?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery2_image', 'gallery2.jpg')) }}" alt="{{ content.get('gallery2_caption', '') }}" loading="lazy" decoding="async" />
+                <figcaption class="gallery__caption-wrap">
+                  <span class="gallery__caption">{{ content.get('gallery2_caption', '') }}</span>
+                  {% if content.get('gallery2_text') %}<span class="gallery__text">{{ content.get('gallery2_text') }}</span>{% endif %}
+                </figcaption>
               </figure>
               <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/gallery3.jpg') }}" alt="Объекты недвижимости" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1722931331109-a200a74b39d5?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery3_image', 'gallery3.jpg')) }}" alt="{{ content.get('gallery3_caption', '') }}" loading="lazy" decoding="async" />
+                <figcaption class="gallery__caption-wrap">
+                  <span class="gallery__caption">{{ content.get('gallery3_caption', '') }}</span>
+                  {% if content.get('gallery3_text') %}<span class="gallery__text">{{ content.get('gallery3_text') }}</span>{% endif %}
+                </figcaption>
               </figure>
               <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/gallery4.jpg') }}" alt="Недвижимость от агентства" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1760611656071-a8bef0578874?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery4_image', 'gallery4.jpg')) }}" alt="{{ content.get('gallery4_caption', '') }}" loading="lazy" decoding="async" />
+                <figcaption class="gallery__caption-wrap">
+                  <span class="gallery__caption">{{ content.get('gallery4_caption', '') }}</span>
+                  {% if content.get('gallery4_text') %}<span class="gallery__text">{{ content.get('gallery4_text') }}</span>{% endif %}
+                </figcaption>
               </figure>
               <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/gallery5.jpg') }}" alt="Зарубежная недвижимость" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1728486887514-9e2f693902d7?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery5_image', 'gallery5.jpg')) }}" alt="{{ content.get('gallery5_caption', '') }}" loading="lazy" decoding="async" />
+                <figcaption class="gallery__caption-wrap">
+                  <span class="gallery__caption">{{ content.get('gallery5_caption', '') }}</span>
+                  {% if content.get('gallery5_text') %}<span class="gallery__text">{{ content.get('gallery5_text') }}</span>{% endif %}
+                </figcaption>
               </figure>
               <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/gallery6.jpg') }}" alt="Квартиры и дома" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1769504574886-8fc9e4e554e8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery6_image', 'gallery6.jpg')) }}" alt="{{ content.get('gallery6_caption', '') }}" loading="lazy" decoding="async" />
+                <figcaption class="gallery__caption-wrap">
+                  <span class="gallery__caption">{{ content.get('gallery6_caption', '') }}</span>
+                  {% if content.get('gallery6_text') %}<span class="gallery__text">{{ content.get('gallery6_text') }}</span>{% endif %}
+                </figcaption>
               </figure>
             </div>
           </div>
@@ -340,7 +367,7 @@
             <h2 id="advantages-title" class="section__title">
               {{ content.get('advantages_title', 'Почему выбирают нас') }}
             </h2>
-            <p class="section__lead">{{ content.get('advantages_lead', 'Одно из ведущих агентств на рынке недвижимости Петрозаводска и Республики Карелия') }}</p>
+            <p class="section__lead">{{ content.get('advantages_lead', 'Одно из ведущих агентств на рынке недвижимости Петрозаводска, Карелии и Москвы') }}</p>
           </div>
           <div class="advantages__grid">
             <div class="advantage-card advantage-card--red">
