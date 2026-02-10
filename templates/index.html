@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Московское Агентство Недвижимости — Петрозаводск, Карелия</title>
-  <meta name="description" content="Агентство недвижимости в Петрозаводске и Республике Карелия. Продажа, покупка, аренда, ипотека. На рынке с 1997 года." />
+  <title>{{ content.get('site_title', 'Московское Агентство Недвижимости — Петрозаводск, Карелия') }}</title>
+  <meta name="description" content="{{ content.get('site_description', 'Агентство недвижимости в Петрозаводске и Республике Карелия. Продажа, покупка, аренда, ипотека. На рынке с 1997 года.') }}" />
   <link rel="icon" href="{{ url_for('static', filename='img/Logo.ico') }}" type="image/x-icon" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
@@ -28,9 +28,9 @@
           <span class="header__burger-line"></span>
         </button>
         <div class="header__actions">
-          <a href="tel:+79004551010" class="header__phone" aria-label="Позвонить">
+          <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}" class="header__phone" aria-label="Позвонить">
             <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            +7 (900) 455-10-10
+            {{ content.get('phone', '+7 (900) 455-10-10') }}
           </a>
           <a href="#contact" class="btn btn--primary btn--pill">Консультация</a>
         </div>
@@ -41,7 +41,7 @@
           <a href="#services" class="header__mobile-link">Услуги</a>
           <a href="#properties" class="header__mobile-link">Недвижимость</a>
           <a href="#contact" class="header__mobile-link">Контакты</a>
-          <a href="tel:+79004551010" class="header__mobile-phone">+7 (900) 455-10-10</a>
+          <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}" class="header__mobile-phone">{{ content.get('phone', '+7 (900) 455-10-10') }}</a>
           <a href="#contact" class="btn btn--primary btn--block btn--lg header__mobile-cta">Консультация</a>
         </nav>
       </div>
@@ -51,48 +51,48 @@
       <!-- Hero -->
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero__bg">
-          <img src="{{ url_for('static', filename='img/hero/hero_bg.jpg') }}" alt="" class="hero__bg-img" width="1080" height="720" decoding="async" fetchpriority="high" data-fallback="https://images.unsplash.com/photo-1769504574886-8fc9e4e554e8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;q=80&amp;w=1080" />
+          <img src="{{ url_for('static', filename='img/hero/hero_bg.png') }}" alt="" class="hero__bg-img" width="1080" height="720" decoding="async" fetchpriority="high" data-fallback="https://images.unsplash.com/photo-1769504574886-8fc9e4e554e8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;q=80&amp;w=1080" />
           <div class="hero__overlay"></div>
         </div>
         <div class="hero__content">
           <div class="hero__badge">
             <span class="hero__badge-dot"></span>
-            <span>На рынке с 1997 года</span>
+            <span>{{ content.get('hero_badge', 'На рынке с 1997 года') }}</span>
           </div>
           <h1 id="hero-title" class="hero__title">
-            Найдём дом <br />вашей <span class="text-red">мечты</span>
+            {{ content.get('hero_title', 'Найдём дом вашей') }} <span class="text-red">{{ content.get('hero_title_highlight', 'мечты') }}</span>
           </h1>
           <p class="hero__lead">
-            Профессиональное агентство недвижимости в Петрозаводске и Республике Карелия
+            {{ content.get('hero_lead', 'Профессиональное агентство недвижимости в Петрозаводске и Республике Карелия') }}
           </p>
           <div class="hero__cta">
             <a href="#properties" class="btn btn--primary btn--lg btn--pill">
-              Найти недвижимость
+              {{ content.get('hero_cta', 'Найти недвижимость') }}
               <svg class="icon icon--ml" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
-            <a href="tel:+79004551010" class="btn btn--outline-white btn--lg btn--pill">+7 (900) 455-10-10</a>
+            <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}" class="btn btn--outline-white btn--lg btn--pill">{{ content.get('phone', '+7 (900) 455-10-10') }}</a>
           </div>
           <div class="hero__stats">
             <div class="stat-card">
               <div class="stat-card__icon stat-card__icon--red">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
               </div>
-              <div class="stat-card__value">1000+</div>
-              <div class="stat-card__label">Успешных сделок</div>
+              <div class="stat-card__value">{{ content.get('stat_deals', '1000+') }}</div>
+              <div class="stat-card__label">{{ content.get('stat_deals_label', 'Успешных сделок') }}</div>
             </div>
             <div class="stat-card">
               <div class="stat-card__icon stat-card__icon--blue">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
-              <div class="stat-card__value">100%</div>
-              <div class="stat-card__label">Юридическая чистота</div>
+              <div class="stat-card__value">{{ content.get('stat_clean', '100%') }}</div>
+              <div class="stat-card__label">{{ content.get('stat_clean_label', 'Юридическая чистота') }}</div>
             </div>
             <div class="stat-card">
               <div class="stat-card__icon stat-card__icon--green">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-4 4h12l-4-4"/><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/></svg>
               </div>
-              <div class="stat-card__value">27</div>
-              <div class="stat-card__label">Лет на рынке</div>
+              <div class="stat-card__value">{{ content.get('stat_years', '27') }}</div>
+              <div class="stat-card__label">{{ content.get('stat_years_label', 'Лет на рынке') }}</div>
             </div>
           </div>
         </div>
@@ -102,23 +102,23 @@
       <section id="about" class="section section--white" aria-labelledby="about-title">
         <div class="container">
           <div class="section__head">
-            <span class="badge">О Компании</span>
+            <span class="badge">{{ content.get('about_badge', 'О Компании') }}</span>
             <h2 id="about-title" class="section__title">
-              Мы знаем, что тепло и уют в Вашем доме – это <span class="text-blue">главное</span>
+              {{ content.get('about_title', 'Мы знаем, что тепло и уют в Вашем доме – это главное') }}
             </h2>
-            <p class="section__lead">27 лет помогаем людям находить дом мечты в Петрозаводске и Республике Карелия</p>
+            <p class="section__lead">{{ content.get('about_lead', '27 лет помогаем людям находить дом мечты в Петрозаводске и Республике Карелия') }}</p>
           </div>
           <div class="about__grid">
             <div class="about__media">
               <div class="about__images">
                 <div class="about__img about__img--large">
-                  <img src="{{ url_for('static', filename='img/about/about1.jpg') }}" alt="Современная недвижимость" width="800" height="320" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1587771518560-d4e96de71240?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;q=80&amp;w=1080" />
+                  <img src="{{ url_for('static', filename='img/about/about1.png') }}" alt="Современная недвижимость" width="800" height="320" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1587771518560-d4e96de71240?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;q=80&amp;w=1080" />
                 </div>
                 <div class="about__img">
-                  <img src="{{ url_for('static', filename='img/about/about2.jpg') }}" alt="Интерьер" width="400" height="192" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1715985160053-d339e8b6eb94?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+                  <img src="{{ url_for('static', filename='img/about/about2.png') }}" alt="Интерьер" width="400" height="192" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1715985160053-d339e8b6eb94?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
                 </div>
                 <div class="about__img">
-                  <img src="{{ url_for('static', filename='img/about/about3.jpg') }}" alt="Счастливые клиенты" width="400" height="192" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1758523671893-0ba21cf4260f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+                  <img src="{{ url_for('static', filename='img/about/about3.png') }}" alt="Счастливые клиенты" width="400" height="192" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1758523671893-0ba21cf4260f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
                 </div>
               </div>
               <div class="about__floating-badge">
@@ -127,8 +127,8 @@
               </div>
             </div>
             <div class="about__text">
-              <p class="about__p">ООО «Московское агентство недвижимости» в Петрозаводске создавалось для того, чтобы люди могли комфортно, с чувством безопасности и защищенности решать свои вопросы, связанные с недвижимостью.</p>
-              <p class="about__p">Высокие стандарты качества оказания риэлторских услуг – наша ежедневная насущная забота. Надежная команда профессионалов риэлторского дела накопила опыт трудных побед и ответственных решений.</p>
+              <p class="about__p">{{ content.get('about_p1', 'ООО «Московское агентство недвижимости» в Петрозаводске создавалось для того, чтобы люди могли комфортно, с чувством безопасности и защищенности решать свои вопросы, связанные с недвижимостью.') }}</p>
+              <p class="about__p">{{ content.get('about_p2', 'Высокие стандарты качества оказания риэлторских услуг – наша ежедневная насущная забота. Надежная команда профессионалов риэлторского дела накопила опыт трудных побед и ответственных решений.') }}</p>
               <div class="about__features">
                 <div class="feature-card">
                   <svg class="feature-card__icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -155,7 +155,7 @@
           </div>
           <blockquote class="quote-banner">
             <div class="quote-banner__icon"></div>
-            <p class="quote-banner__text">ПРОФЕССИОНАЛИЗМ И ПОРЯДОЧНОСТЬ – ОСНОВНЫЕ ПРИНЦИПЫ НАШЕЙ РАБОТЫ И СОТРУДНИЧЕСТВА!</p>
+            <p class="quote-banner__text">{{ content.get('about_quote', 'ПРОФЕССИОНАЛИЗМ И ПОРЯДОЧНОСТЬ – ОСНОВНЫЕ ПРИНЦИПЫ НАШЕЙ РАБОТЫ И СОТРУДНИЧЕСТВА!') }}</p>
           </blockquote>
         </div>
       </section>
@@ -164,17 +164,22 @@
       <section id="services" class="section section--white" aria-labelledby="services-title">
         <div class="container">
           <div class="section__head">
-            <span class="badge">Наши Услуги</span>
+            <span class="badge">{{ content.get('services_badge', 'Наши Услуги') }}</span>
             <h2 id="services-title" class="section__title">
-              Все сделки с недвижимостью <span class="text-blue">под ключ</span>
+              {{ content.get('services_title', 'Все сделки с недвижимостью под ключ') }}
             </h2>
-            <p class="section__lead">Осуществляем полный спектр риэлторских услуг с гарантией юридической чистоты</p>
+            <p class="section__lead">{{ content.get('services_lead', 'Осуществляем полный спектр риэлторских услуг с гарантией юридической чистоты') }}</p>
           </div>
           <div class="services__grid">
             <div class="service-card">
               <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
               <h3 class="service-card__title">Продажа недвижимости</h3>
               <p class="service-card__desc">Квартиры, дома, земельные участки, гаражи в Петрозаводске и Республике Карелия</p>
+            </div>
+            <div class="service-card service-card--featured" style="background-image: url('{{ url_for('static', filename='img/about/about1.png') }}');">
+              <div class="service-card__icon service-card__icon--featured"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              <h3 class="service-card__title">Срочный выкуп</h3>
+              <p class="service-card__desc">Быстро выкупим вашу недвижимость за рыночную цену. Оценка за 24 часа, расчёт в кратчайшие сроки</p>
             </div>
             <div class="service-card">
               <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
@@ -192,14 +197,14 @@
               <p class="service-card__desc">Долгосрочная и краткосрочная аренда жилой недвижимости</p>
             </div>
             <div class="service-card">
+              <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 7h6m-3 3v6M5 7h4v10H5V7zm4-4v4M5 3h4"/><path d="M19 7v10h-4V7h4z"/></svg></div>
+              <h3 class="service-card__title">Ремонт квартир</h3>
+              <p class="service-card__desc">Подбор проверенных бригад, контроль качества и сроков. Ремонт под ключ</p>
+            </div>
+            <div class="service-card">
               <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><path d="M1 10h22"/></svg></div>
               <h3 class="service-card__title">Ипотека</h3>
               <p class="service-card__desc">Сотрудничество с 8 ведущими банками, выгодные условия кредитования</p>
-            </div>
-            <div class="service-card">
-              <div class="service-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-              <h3 class="service-card__title">Зарубежная недвижимость</h3>
-              <p class="service-card__desc">Покупка и продажа недвижимости в курортных зонах, Болгария</p>
             </div>
           </div>
           <!-- Bank Carousel -->
@@ -291,106 +296,38 @@
       <section id="properties" class="section section--gray" aria-labelledby="properties-title">
         <div class="container">
           <div class="section__head">
-            <span class="badge badge--white">Наша Недвижимость</span>
+            <span class="badge badge--white">{{ content.get('gallery_badge', 'Наша Недвижимость') }}</span>
             <h2 id="properties-title" class="section__title">
-              Галерея <span class="text-blue">лучших предложений</span>
+              {{ content.get('gallery_title', 'Галерея лучших предложений') }}
             </h2>
-            <p class="section__lead">Актуальные объекты недвижимости в Карелии и за рубежом</p>
+            <p class="section__lead">{{ content.get('gallery_lead', 'Актуальные объекты недвижимости в Карелии и за рубежом') }}</p>
           </div>
           <div class="gallery">
             <div class="gallery__grid">
-              <div class="gallery__card">
-                <div class="gallery__card-img-wrap">
-                  <img src="{{ url_for('static', filename='img/gallery/gallery1.jpg') }}" alt="3-комнатная квартира в центре" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1652349566508-457d0565463c?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
-                  <div class="gallery__card-overlay"></div>
-                  <span class="gallery__card-badge gallery__card-badge--hit">Хит</span>
-                  <span class="gallery__card-type"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Квартира</span>
-                  <button type="button" class="gallery__card-like" data-id="1" aria-label="Добавить в избранное"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                  <span class="gallery__card-location"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> г. Петрозаводск, ул. Ленина</span>
-                </div>
-                <div class="gallery__card-body">
-                  <h3 class="gallery__card-title">3-комнатная квартира в центре</h3>
-                  <div class="gallery__card-specs"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg> 85 м²</span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 9h.01"/><path d="M15 9h.01"/><path d="M9 13h6"/></svg> 3</span></div>
-                  <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">4 500 000 ₽</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
-                </div>
-              </div>
-              <div class="gallery__card">
-                <div class="gallery__card-img-wrap">
-                  <img src="{{ url_for('static', filename='img/gallery/gallery2.jpg') }}" alt="Коттедж с участком" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1759889392274-246af1a984ba?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
-                  <div class="gallery__card-overlay"></div>
-                  <span class="gallery__card-type"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Дом</span>
-                  <button type="button" class="gallery__card-like" data-id="2" aria-label="Добавить в избранное"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                  <span class="gallery__card-location"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> г. Петрозаводск, пригород</span>
-                </div>
-                <div class="gallery__card-body">
-                  <h3 class="gallery__card-title">Коттедж с участком</h3>
-                  <div class="gallery__card-specs"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg> 180 м²</span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 9h.01"/><path d="M15 9h.01"/><path d="M9 13h6"/></svg> 5</span></div>
-                  <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">8 900 000 ₽</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
-                </div>
-              </div>
-              <div class="gallery__card">
-                <div class="gallery__card-img-wrap">
-                  <img src="{{ url_for('static', filename='img/gallery/gallery3.jpg') }}" alt="Участок под ИЖС у озера" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1722931331109-a200a74b39d5?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
-                  <div class="gallery__card-overlay"></div>
-                  <span class="gallery__card-type"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22v-4"/><path d="M12 18a6 6 0 0 0 6-6V4H6v8a6 6 0 0 0 6 6z"/><path d="M6 12H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M18 12h2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/></svg> Участок</span>
-                  <button type="button" class="gallery__card-like" data-id="3" aria-label="Добавить в избранное"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                  <span class="gallery__card-location"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Республика Карелия</span>
-                </div>
-                <div class="gallery__card-body">
-                  <h3 class="gallery__card-title">Участок под ИЖС у озера</h3>
-                  <div class="gallery__card-specs"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg> 20 м²</span></div>
-                  <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">1 200 000 ₽</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
-                </div>
-              </div>
-              <div class="gallery__card">
-                <div class="gallery__card-img-wrap">
-                  <img src="{{ url_for('static', filename='img/gallery/gallery4.jpg') }}" alt="Пентхаус с панорамным видом" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1760611656071-a8bef0578874?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
-                  <div class="gallery__card-overlay"></div>
-                  <span class="gallery__card-badge gallery__card-badge--hit">Хит</span>
-                  <span class="gallery__card-type"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Пентхаус</span>
-                  <button type="button" class="gallery__card-like" data-id="4" aria-label="Добавить в избранное"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                  <span class="gallery__card-location"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> г. Петрозаводск, набережная</span>
-                </div>
-                <div class="gallery__card-body">
-                  <h3 class="gallery__card-title">Пентхаус с панорамным видом</h3>
-                  <div class="gallery__card-specs"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg> 150 м²</span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 9h.01"/><path d="M15 9h.01"/><path d="M9 13h6"/></svg> 4</span></div>
-                  <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">12 500 000 ₽</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
-                </div>
-              </div>
-              <div class="gallery__card">
-                <div class="gallery__card-img-wrap">
-                  <img src="{{ url_for('static', filename='img/gallery/gallery5.jpg') }}" alt="Элитная вилла с бассейном" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1728486887514-9e2f693902d7?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
-                  <div class="gallery__card-overlay"></div>
-                  <span class="gallery__card-type"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Вилла</span>
-                  <button type="button" class="gallery__card-like" data-id="5" aria-label="Добавить в избранное"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                  <span class="gallery__card-location"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Болгария, курортная зона</span>
-                </div>
-                <div class="gallery__card-body">
-                  <h3 class="gallery__card-title">Элитная вилла с бассейном</h3>
-                  <div class="gallery__card-specs"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg> 220 м²</span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 9h.01"/><path d="M15 9h.01"/><path d="M9 13h6"/></svg> 5</span></div>
-                  <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">€250 000</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
-                </div>
-              </div>
-              <div class="gallery__card">
-                <div class="gallery__card-img-wrap">
-                  <img src="{{ url_for('static', filename='img/gallery/gallery6.jpg') }}" alt="Современная студия" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1769504574886-8fc9e4e554e8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
-                  <div class="gallery__card-overlay"></div>
-                  <span class="gallery__card-type"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Студия</span>
-                  <button type="button" class="gallery__card-like" data-id="6" aria-label="Добавить в избранное"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                  <span class="gallery__card-location"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> г. Петрозаводск, новостройка</span>
-                </div>
-                <div class="gallery__card-body">
-                  <h3 class="gallery__card-title">Современная студия</h3>
-                  <div class="gallery__card-specs"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg> 42 м²</span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 9h.01"/><path d="M15 9h.01"/><path d="M9 13h6"/></svg> 1</span></div>
-                  <div class="gallery__card-footer"><div><span class="gallery__card-price-label">Цена</span><span class="gallery__card-price">2 800 000 ₽</span></div><a href="#contact" class="btn btn--primary btn--sm btn--pill">Смотреть</a></div>
-                </div>
-              </div>
+              <figure class="gallery__item">
+                <img src="{{ url_for('static', filename='img/gallery/gallery1.jpg') }}" alt="Недвижимость в Петрозаводске" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1652349566508-457d0565463c?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+              </figure>
+              <figure class="gallery__item">
+                <img src="{{ url_for('static', filename='img/gallery/gallery2.jpg') }}" alt="Недвижимость в Карелии" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1759889392274-246af1a984ba?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+              </figure>
+              <figure class="gallery__item">
+                <img src="{{ url_for('static', filename='img/gallery/gallery3.jpg') }}" alt="Объекты недвижимости" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1722931331109-a200a74b39d5?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+              </figure>
+              <figure class="gallery__item">
+                <img src="{{ url_for('static', filename='img/gallery/gallery4.jpg') }}" alt="Недвижимость от агентства" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1760611656071-a8bef0578874?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+              </figure>
+              <figure class="gallery__item">
+                <img src="{{ url_for('static', filename='img/gallery/gallery5.jpg') }}" alt="Зарубежная недвижимость" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1728486887514-9e2f693902d7?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+              </figure>
+              <figure class="gallery__item">
+                <img src="{{ url_for('static', filename='img/gallery/gallery6.jpg') }}" alt="Квартиры и дома" loading="lazy" decoding="async" data-fallback="https://images.unsplash.com/photo-1769504574886-8fc9e4e554e8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg" />
+              </figure>
             </div>
           </div>
           <div class="cta-banner cta-banner--blue">
-            <h3 class="cta-banner__title">Не нашли подходящий вариант?</h3>
-            <p class="cta-banner__text">Оставьте заявку, и мы подберём идеальную недвижимость за 24 часа</p>
-            <a href="#contact" class="btn btn--white btn--lg btn--pill">Оставить заявку</a>
+            <h3 class="cta-banner__title">{{ content.get('cta_title', 'Не нашли подходящий вариант?') }}</h3>
+            <p class="cta-banner__text">{{ content.get('cta_text', 'Оставьте заявку, и мы подберём идеальную недвижимость за 24 часа') }}</p>
+            <a href="#contact" class="btn btn--white btn--lg btn--pill">{{ content.get('cta_btn', 'Оставить заявку') }}</a>
           </div>
         </div>
       </section>
@@ -399,49 +336,62 @@
       <section class="section section--white" aria-labelledby="advantages-title">
         <div class="container">
           <div class="section__head">
-            <span class="badge">Наши Преимущества</span>
+            <span class="badge badge--outline">{{ content.get('advantages_badge', 'Наши преимущества') }}</span>
             <h2 id="advantages-title" class="section__title">
-              Почему выбирают <span class="text-blue">нас</span>
+              {{ content.get('advantages_title', 'Почему выбирают нас') }}
             </h2>
-            <p class="section__lead">Одно из ведущих агентств на рынке недвижимости Петрозаводска и Республики Карелия</p>
+            <p class="section__lead">{{ content.get('advantages_lead', 'Одно из ведущих агентств на рынке недвижимости Петрозаводска и Республики Карелия') }}</p>
           </div>
           <div class="advantages__grid">
-            <div class="advantage-card">
-              <div class="advantage-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="advantage-card advantage-card--red">
+              <div class="advantage-card__top">
+                <div class="advantage-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <span class="advantage-card__pill">Безопасно</span>
+              </div>
               <h3 class="advantage-card__title">Юридическая чистота</h3>
               <p class="advantage-card__desc">100% гарантия безопасности сделки, проверка всех документов</p>
             </div>
-            <div class="advantage-card">
-              <div class="advantage-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-              <h3 class="advantage-card__title">27 лет опыта</h3>
-              <p class="advantage-card__desc">Работаем с 1997 года, тысячи успешно проведённых сделок</p>
-            </div>
-            <div class="advantage-card">
-              <div class="advantage-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-              <h3 class="advantage-card__title">Профессиональная команда</h3>
-              <p class="advantage-card__desc">Опытные риэлторы с глубоким знанием рынка</p>
-            </div>
-            <div class="advantage-card">
-              <div class="advantage-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
-              <h3 class="advantage-card__title">Полное сопровождение</h3>
-              <p class="advantage-card__desc">От подбора до регистрации права собственности</p>
-            </div>
-            <div class="advantage-card">
-              <div class="advantage-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+            <div class="advantage-card advantage-card--blue">
+              <div class="advantage-card__top">
+                <div class="advantage-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+                <span class="advantage-card__pill">Профессионально</span>
+              </div>
               <h3 class="advantage-card__title">Поддержка 24/7</h3>
               <p class="advantage-card__desc">Всегда на связи, ответим на все вопросы</p>
             </div>
-            <div class="advantage-card">
-              <div class="advantage-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div class="advantage-card advantage-card--green">
+              <div class="advantage-card__top">
+                <div class="advantage-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                <span class="advantage-card__pill">Выгодно</span>
+              </div>
               <h3 class="advantage-card__title">Лучшая цена</h3>
               <p class="advantage-card__desc">Поможем продать выгодно или купить с хорошей скидкой</p>
             </div>
+            <div class="advantage-card advantage-card--red">
+              <div class="advantage-card__top">
+                <div class="advantage-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
+                <span class="advantage-card__pill">Человечно</span>
+              </div>
+              <h3 class="advantage-card__title">Полное сопровождение</h3>
+              <p class="advantage-card__desc">От подбора до регистрации права собственности</p>
+            </div>
+            <div class="advantage-card advantage-card--blue">
+              <div class="advantage-card__top">
+                <div class="advantage-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+                <span class="advantage-card__pill">Надёжно</span>
+              </div>
+              <h3 class="advantage-card__title">27 лет опыта</h3>
+              <p class="advantage-card__desc">Работаем с 1997 года, тысячи успешно проведённых сделок</p>
+            </div>
+            <div class="advantage-card advantage-card--green">
+              <div class="advantage-card__top">
+                <div class="advantage-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <span class="advantage-card__pill">С заботой</span>
+              </div>
+              <h3 class="advantage-card__title">Профессиональная команда</h3>
+              <p class="advantage-card__desc">Опытные риэлторы с глубоким знанием рынка</p>
+            </div>
           </div>
-          <blockquote class="quote-banner quote-banner--alt">
-            <div class="quote-banner__icon"></div>
-            <p class="quote-banner__text">ПРОФЕССИОНАЛИЗМ И ПОРЯДОЧНОСТЬ – ОСНОВНЫЕ ПРИНЦИПЫ НАШЕЙ РАБОТЫ И СОТРУДНИЧЕСТВА!</p>
-            <p class="quote-banner__author">Московское Агентство Недвижимости</p>
-          </blockquote>
         </div>
       </section>
 
@@ -449,32 +399,32 @@
       <section id="contact" class="section section--gray" aria-labelledby="contact-title">
         <div class="container">
           <div class="section__head">
-            <span class="badge badge--white">Оставьте Заявку</span>
+            <span class="badge badge--white">{{ content.get('contact_badge', 'Оставьте Заявку') }}</span>
             <h2 id="contact-title" class="section__title">
-              Получите <span class="text-blue">бесплатную консультацию</span>
+              {{ content.get('contact_title', 'Получите бесплатную консультацию') }}
             </h2>
-            <p class="section__lead">Мы свяжемся с вами в ближайшее время и ответим на все вопросы</p>
+            <p class="section__lead">{{ content.get('contact_lead', 'Мы свяжемся с вами в ближайшее время и ответим на все вопросы') }}</p>
           </div>
           <div class="contact-cards">
             <div class="contact-card">
               <div class="contact-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
               <h3 class="contact-card__title">Телефон</h3>
-              <a href="tel:+79004551010" class="contact-card__link">+7 (900) 455-10-10</a>
+              <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}" class="contact-card__link">{{ content.get('phone', '+7 (900) 455-10-10') }}</a>
             </div>
             <div class="contact-card">
               <div class="contact-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></div>
               <h3 class="contact-card__title">Email</h3>
-              <a href="mailto:ptz.man@yandex.ru" class="contact-card__link">ptz.man@yandex.ru</a>
+              <a href="mailto:{{ content.get('email', '') }}" class="contact-card__link">{{ content.get('email', 'ptz.man@yandex.ru') }}</a>
             </div>
             <div class="contact-card">
               <div class="contact-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
               <h3 class="contact-card__title">Адрес</h3>
-              <p class="contact-card__text">г. Петрозаводск, ул. Ровио, д. 38</p>
+              <p class="contact-card__text">{{ content.get('address', 'г. Петрозаводск, ул. Ровио, д. 38') }}</p>
             </div>
             <div class="contact-card">
               <div class="contact-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
               <h3 class="contact-card__title">Режим работы</h3>
-              <p class="contact-card__text">Пн-Пт: 10:00 – 18:00</p>
+              <p class="contact-card__text">{{ content.get('schedule', 'Пн-Пт: 10:00 – 18:00') }}</p>
             </div>
           </div>
           <div class="contact__grid">
@@ -498,8 +448,8 @@
             <div class="contact__aside">
               <div class="partner-badge">
                 <div class="partner-badge__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-4 4h12l-4-4"/><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/></svg></div>
-                <h3 class="partner-badge__title">Официальный партнёр</h3>
-                <p class="partner-badge__text">С 2012 года агентство является первым и единственным в Республике Карелия официальным партнёром и аккредитованным представителем «Дрийм Хоум» ЕООД (Болгария).</p>
+                <h3 class="partner-badge__title">{{ content.get('partner_title', 'Официальный партнёр') }}</h3>
+                <p class="partner-badge__text">{{ content.get('partner_text', 'С 2012 года агентство является первым и единственным в Республике Карелия официальным партнёром и аккредитованным представителем «Дрийм Хоум» ЕООД (Болгария).') }}</p>
               </div>
               <div class="benefits-mini">
                 <div class="benefits-mini__item"><span class="benefits-mini__value">24ч</span><span class="benefits-mini__label">Быстрый ответ</span></div>
@@ -524,7 +474,7 @@
             <a href="/" class="footer__logo">
             <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="Московское Агентство Недвижимости" class="footer__logo-img" width="140" height="56" loading="lazy" decoding="async" />
           </a>
-            <p class="footer__about">Работаем на рынке недвижимости с 1997 года. Профессионализм и порядочность – основные принципы нашей работы.</p>
+            <p class="footer__about">{{ content.get('footer_about', 'Работаем на рынке недвижимости с 1997 года. Профессионализм и порядочность – основные принципы нашей работы.') }}</p>
             <div class="footer__social">
               <a href="#" class="footer__social-link" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
               <a href="#" class="footer__social-link" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
@@ -547,21 +497,22 @@
               <li>Покупка недвижимости</li>
               <li>Обмен</li>
               <li>Аренда квартир</li>
+              <li>Срочный выкуп</li>
+              <li>Ремонт квартир</li>
               <li>Ипотека</li>
-              <li>Зарубежная недвижимость</li>
             </ul>
           </div>
           <div class="footer__block">
             <h3 class="footer__heading">Контакты</h3>
             <ul class="footer__contacts">
-              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> г. Петрозаводск, ул. Ровио, д. 38</li>
-              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:+79004551010">+7 (900) 455-10-10</a></li>
-              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg> <a href="mailto:ptz.man@yandex.ru">ptz.man@yandex.ru</a></li>
+              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> {{ content.get('address', 'г. Петрозаводск, ул. Ровио, д. 38') }}</li>
+              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}">{{ content.get('phone', '+7 (900) 455-10-10') }}</a></li>
+              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg> <a href="mailto:{{ content.get('email', '') }}">{{ content.get('email', 'ptz.man@yandex.ru') }}</a></li>
             </ul>
           </div>
         </div>
         <div class="footer__bottom">
-          <p class="footer__copy">© 2026 ООО «Московское Агентство Недвижимости». Все права защищены.</p>
+          <p class="footer__copy">{{ content.get('footer_copy', '© 2026 ООО «Московское Агентство Недвижимости». Все права защищены.') }}</p>
           <div class="footer__legal">
             <a href="#">Политика конфиденциальности</a>
             <a href="#">Пользовательское соглашение</a>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Админка — Московское Агентство Недвижимости</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; margin: 0; padding: 1.5rem; background: #f3f4f6; }
+    h1 { margin: 0 0 1.5rem; font-size: 1.5rem; }
+    .admin { max-width: 56rem; margin: 0 auto; }
+    .admin__section { background: #fff; border-radius: 0.5rem; padding: 1.25rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .admin__section h2 { margin: 0 0 1rem; font-size: 1.125rem; color: #374151; }
+    .admin__grid { display: grid; gap: 1rem; }
+    @media (min-width: 640px) { .admin__grid { grid-template-columns: repeat(2, 1fr); } }
+    label { display: block; font-size: 0.875rem; font-weight: 600; color: #4b5563; margin-bottom: 0.25rem; }
+    input, textarea { width: 100%; padding: 0.5rem 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; font-size: 1rem; }
+    textarea { min-height: 4rem; resize: vertical; }
+    .admin__actions { margin-top: 1.5rem; display: flex; gap: 0.75rem; align-items: center; }
+    .btn { padding: 0.625rem 1.25rem; font-weight: 600; border-radius: 0.5rem; border: none; cursor: pointer; font-size: 1rem; }
+    .btn--primary { background: #dc2626; color: #fff; }
+    .btn--primary:hover { background: #b91c1c; }
+    .admin__msg { font-size: 0.875rem; color: #059669; }
+    .admin__msg.error { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <div class="admin">
+    <h1>Редактирование контента лендинга</h1>
+    <p style="color:#6b7280; margin-bottom: 1.5rem;">Вход по ссылке: <strong>https://ваш-домен/ваш-jwt-токен/admin</strong></p>
+
+    <form id="admin-form" class="admin__form">
+      <div class="admin__section">
+        <h2>Сайт (title, description)</h2>
+        <div class="admin__grid">
+          <div><label for="site_title">Заголовок страницы</label><input type="text" id="site_title" name="site_title" value="{{ content.get('site_title', '') }}" /></div>
+          <div><label for="site_description">Описание (meta)</label><input type="text" id="site_description" name="site_description" value="{{ content.get('site_description', '') }}" /></div>
+        </div>
+      </div>
+
+      <div class="admin__section">
+        <h2>Контакты (телефон, email, адрес)</h2>
+        <div class="admin__grid">
+          <div><label for="phone">Телефон</label><input type="text" id="phone" name="phone" value="{{ content.get('phone', '') }}" /></div>
+          <div><label for="email">Email</label><input type="email" id="email" name="email" value="{{ content.get('email', '') }}" /></div>
+          <div><label for="address">Адрес</label><input type="text" id="address" name="address" value="{{ content.get('address', '') }}" /></div>
+          <div><label for="schedule">Режим работы</label><input type="text" id="schedule" name="schedule" value="{{ content.get('schedule', '') }}" /></div>
+        </div>
+      </div>
+
+      <div class="admin__section">
+        <h2>Hero (главный экран)</h2>
+        <div class="admin__grid">
+          <div><label for="hero_badge">Бейдж</label><input type="text" id="hero_badge" name="hero_badge" value="{{ content.get('hero_badge', '') }}" /></div>
+          <div><label for="hero_title">Заголовок</label><input type="text" id="hero_title" name="hero_title" value="{{ content.get('hero_title', '') }}" /></div>
+          <div class="admin__grid" style="grid-column: 1 / -1;"><label for="hero_lead">Подзаголовок</label><input type="text" id="hero_lead" name="hero_lead" value="{{ content.get('hero_lead', '') }}" /></div>
+          <div><label for="hero_cta">Текст кнопки</label><input type="text" id="hero_cta" name="hero_cta" value="{{ content.get('hero_cta', '') }}" /></div>
+        </div>
+      </div>
+
+      <div class="admin__section">
+        <h2>О компании</h2>
+        <div class="admin__grid">
+          <div><label for="about_badge">Бейдж</label><input type="text" id="about_badge" name="about_badge" value="{{ content.get('about_badge', '') }}" /></div>
+          <div><label for="about_title">Заголовок</label><input type="text" id="about_title" name="about_title" value="{{ content.get('about_title', '') }}" /></div>
+          <div style="grid-column: 1 / -1;"><label for="about_lead">Подзаголовок</label><input type="text" id="about_lead" name="about_lead" value="{{ content.get('about_lead', '') }}" /></div>
+          <div style="grid-column: 1 / -1;"><label for="about_p1">Текст 1</label><textarea id="about_p1" name="about_p1" rows="2">{{ content.get('about_p1', '') }}</textarea></div>
+          <div style="grid-column: 1 / -1;"><label for="about_p2">Текст 2</label><textarea id="about_p2" name="about_p2" rows="2">{{ content.get('about_p2', '') }}</textarea></div>
+          <div style="grid-column: 1 / -1;"><label for="about_quote">Цитата</label><input type="text" id="about_quote" name="about_quote" value="{{ content.get('about_quote', '') }}" /></div>
+        </div>
+      </div>
+
+      <div class="admin__section">
+        <h2>Услуги</h2>
+        <div class="admin__grid">
+          <div><label for="services_badge">Бейдж</label><input type="text" id="services_badge" name="services_badge" value="{{ content.get('services_badge', '') }}" /></div>
+          <div><label for="services_title">Заголовок</label><input type="text" id="services_title" name="services_title" value="{{ content.get('services_title', '') }}" /></div>
+          <div style="grid-column: 1 / -1;"><label for="services_lead">Подзаголовок</label><input type="text" id="services_lead" name="services_lead" value="{{ content.get('services_lead', '') }}" /></div>
+        </div>
+      </div>
+
+      <div class="admin__section">
+        <h2>Галерея и CTA</h2>
+        <div class="admin__grid">
+          <div><label for="gallery_badge">Бейдж галереи</label><input type="text" id="gallery_badge" name="gallery_badge" value="{{ content.get('gallery_badge', '') }}" /></div>
+          <div><label for="gallery_title">Заголовок галереи</label><input type="text" id="gallery_title" name="gallery_title" value="{{ content.get('gallery_title', '') }}" /></div>
+          <div><label for="gallery_lead">Подзаголовок галереи</label><input type="text" id="gallery_lead" name="gallery_lead" value="{{ content.get('gallery_lead', '') }}" /></div>
+          <div><label for="cta_title">Заголовок CTA</label><input type="text" id="cta_title" name="cta_title" value="{{ content.get('cta_title', '') }}" /></div>
+          <div><label for="cta_text">Текст CTA</label><input type="text" id="cta_text" name="cta_text" value="{{ content.get('cta_text', '') }}" /></div>
+          <div><label for="cta_btn">Кнопка CTA</label><input type="text" id="cta_btn" name="cta_btn" value="{{ content.get('cta_btn', '') }}" /></div>
+        </div>
+      </div>
+
+      <div class="admin__section">
+        <h2>Преимущества</h2>
+        <div class="admin__grid">
+          <div><label for="advantages_badge">Бейдж</label><input type="text" id="advantages_badge" name="advantages_badge" value="{{ content.get('advantages_badge', '') }}" /></div>
+          <div><label for="advantages_title">Заголовок</label><input type="text" id="advantages_title" name="advantages_title" value="{{ content.get('advantages_title', '') }}" /></div>
+          <div style="grid-column: 1 / -1;"><label for="advantages_lead">Подзаголовок</label><input type="text" id="advantages_lead" name="advantages_lead" value="{{ content.get('advantages_lead', '') }}" /></div>
+        </div>
+      </div>
+
+      <div class="admin__section">
+        <h2>Контакты (секция и партнёр)</h2>
+        <div class="admin__grid">
+          <div><label for="contact_badge">Бейдж</label><input type="text" id="contact_badge" name="contact_badge" value="{{ content.get('contact_badge', '') }}" /></div>
+          <div><label for="contact_title">Заголовок</label><input type="text" id="contact_title" name="contact_title" value="{{ content.get('contact_title', '') }}" /></div>
+          <div style="grid-column: 1 / -1;"><label for="contact_lead">Подзаголовок</label><input type="text" id="contact_lead" name="contact_lead" value="{{ content.get('contact_lead', '') }}" /></div>
+          <div><label for="partner_title">Заголовок блока партнёр</label><input type="text" id="partner_title" name="partner_title" value="{{ content.get('partner_title', '') }}" /></div>
+          <div style="grid-column: 1 / -1;"><label for="partner_text">Текст партнёр</label><textarea id="partner_text" name="partner_text" rows="2">{{ content.get('partner_text', '') }}</textarea></div>
+        </div>
+      </div>
+
+      <div class="admin__section">
+        <h2>Футер</h2>
+        <div class="admin__grid">
+          <div style="grid-column: 1 / -1;"><label for="footer_about">Текст о компании</label><textarea id="footer_about" name="footer_about" rows="2">{{ content.get('footer_about', '') }}</textarea></div>
+          <div style="grid-column: 1 / -1;"><label for="footer_copy">Копирайт</label><input type="text" id="footer_copy" name="footer_copy" value="{{ content.get('footer_copy', '') }}" /></div>
+        </div>
+      </div>
+
+      <div class="admin__section">
+        <h2>Статистика в Hero</h2>
+        <div class="admin__grid">
+          <div><label for="stat_deals">Значение 1</label><input type="text" id="stat_deals" name="stat_deals" value="{{ content.get('stat_deals', '') }}" /></div>
+          <div><label for="stat_deals_label">Подпись 1</label><input type="text" id="stat_deals_label" name="stat_deals_label" value="{{ content.get('stat_deals_label', '') }}" /></div>
+          <div><label for="stat_clean">Значение 2</label><input type="text" id="stat_clean" name="stat_clean" value="{{ content.get('stat_clean', '') }}" /></div>
+          <div><label for="stat_clean_label">Подпись 2</label><input type="text" id="stat_clean_label" name="stat_clean_label" value="{{ content.get('stat_clean_label', '') }}" /></div>
+          <div><label for="stat_years">Значение 3</label><input type="text" id="stat_years" name="stat_years" value="{{ content.get('stat_years', '') }}" /></div>
+          <div><label for="stat_years_label">Подпись 3</label><input type="text" id="stat_years_label" name="stat_years_label" value="{{ content.get('stat_years_label', '') }}" /></div>
+        </div>
+      </div>
+
+      <div class="admin__actions">
+        <button type="submit" class="btn btn--primary">Сохранить</button>
+        <span id="admin-msg" class="admin__msg" aria-live="polite"></span>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    (function() {
+      var form = document.getElementById('admin-form');
+      var msg = document.getElementById('admin-msg');
+      var adminToken = '{{ admin_token }}';
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        msg.textContent = '';
+        msg.classList.remove('error');
+        var fd = new FormData(form);
+        var data = {};
+        fd.forEach(function(v, k) { data[k] = v; });
+
+        fetch('/' + encodeURIComponent(adminToken) + '/admin/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+          .then(function(r) { return r.json().then(function(j) { return { status: r.status, body: j }; }); })
+          .then(function(res) {
+            if (res.status === 200 && res.body.ok) {
+              msg.textContent = 'Сохранено.';
+            } else {
+              msg.textContent = res.body.error || 'Ошибка сохранения';
+              msg.classList.add('error');
+            }
+          })
+          .catch(function() {
+            msg.textContent = 'Ошибка сети';
+            msg.classList.add('error');
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 /**
  * Лендинг «Московское Агентство Недвижимости»
- * Поведение: хедер при скролле, карусель галереи, лайки, форма, тост
+ * Поведение: хедер при скролле, мобильное меню, форма, тост
  */
 (function () {
   'use strict';
@@ -57,35 +57,6 @@
       }
     });
   }
-
-  // ---------- Gallery like buttons ----------
-  var likedIds = JSON.parse(localStorage.getItem('gallery-liked') || '[]');
-
-  function saveLiked() {
-    try {
-      localStorage.setItem('gallery-liked', JSON.stringify(likedIds));
-    } catch (err) {}
-  }
-
-  document.querySelectorAll('.gallery__card-like').forEach(function (btn) {
-    var id = btn.getAttribute('data-id');
-    if (id && likedIds.indexOf(id) !== -1) {
-      btn.classList.add('is-liked');
-    }
-    btn.addEventListener('click', function () {
-      var id = btn.getAttribute('data-id');
-      if (!id) return;
-      var idx = likedIds.indexOf(id);
-      if (idx === -1) {
-        likedIds.push(id);
-        btn.classList.add('is-liked');
-      } else {
-        likedIds.splice(idx, 1);
-        btn.classList.remove('is-liked');
-      }
-      saveLiked();
-    });
-  });
 
   // ---------- Contact form & toast ----------
   var contactForm = document.getElementById('contact-form');
