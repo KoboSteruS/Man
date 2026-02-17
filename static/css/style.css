@@ -250,6 +250,9 @@ ul, ol { list-style: none; }
 .btn--primary { background: var(--red-600); color: #fff; }
 .btn--primary:hover { background: var(--red-700); }
 .btn--primary:focus-visible { outline: 2px solid var(--red-600); outline-offset: 2px; }
+.btn--green { background: var(--green-600); color: #fff; }
+.btn--green:hover { background: #15803d; }
+.btn--green:focus-visible { outline: 2px solid var(--green-600); outline-offset: 2px; }
 .btn--pill { border-radius: 9999px; }
 .btn--lg { padding: 1rem 2rem; font-size: 1.125rem; }
 .btn--sm { padding: 0.375rem 1rem; font-size: 0.875rem; }
@@ -427,6 +430,138 @@ ul, ol { list-style: none; }
 }
 .quote-banner--alt .quote-banner__icon { width: 5rem; height: 5rem; margin-bottom: 2rem; }
 .quote-banner__author { color: rgba(255,255,255,0.8); font-weight: 600; font-size: 1.125rem; margin-top: 1rem; }
+
+/* ========== Руководитель (после цитаты) ========== */
+.about-leader {
+  display: grid;
+  gap: 2rem;
+  margin-top: 4rem;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .about-leader { grid-template-columns: minmax(340px, 520px) 1fr; }
+}
+.about-leader__photo {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--gray-100);
+  aspect-ratio: 4 / 5;
+}
+.about-leader__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.about-leader__name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+}
+.about-leader__position {
+  font-size: 1.125rem;
+  color: var(--gray-600);
+  margin-bottom: 0.5rem;
+}
+.about-leader__info-text {
+  font-size: 0.9375rem;
+  color: var(--gray-600);
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+.about-leader__certs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  max-width: 320px;
+}
+@media (min-width: 480px) {
+  .about-leader__certs { grid-template-columns: repeat(5, 1fr); max-width: none; }
+}
+.leader-cert {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 2px solid var(--gray-200);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.leader-cert:hover { border-color: var(--red-600); box-shadow: var(--shadow-lg); }
+.leader-cert:focus-visible { outline: 2px solid var(--red-600); outline-offset: 2px; }
+.leader-cert img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 80 / 110;
+  object-fit: cover;
+}
+.about-leader__cert-main {
+  margin-top: 1.5rem;
+}
+.leader-cert--main {
+  max-width: 662px;
+  width: 100%;
+  max-height: 327px;
+}
+.leader-cert--main img {
+  aspect-ratio: 3 / 2;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Лайтбокс сертификатов */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.lightbox[hidden] { display: none; }
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+}
+.lightbox__img {
+  position: relative;
+  z-index: 1;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-2xl);
+}
+.lightbox__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.lightbox__close:hover { background: rgba(255, 255, 255, 0.35); }
+.lightbox__close::after { content: '×'; }
 
 /* ========== Services ========== */
 .services__grid {
@@ -633,12 +768,55 @@ ul, ol { list-style: none; }
   grid-template-columns: 1fr;
   gap: 0.75rem;
 }
+.gallery__grid--two {
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
 @media (min-width: 640px) {
   .gallery__grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .gallery__grid--two { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 1024px) {
   .gallery__grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .gallery__grid--two { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Две карточки «актуальных объектов»: по 640px, по центру */
+.gallery--full-bleed {
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+}
+@media (min-width: 640px) {
+  .gallery--full-bleed { padding-inline: 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .gallery--full-bleed { padding-inline: 2rem; }
+}
+.gallery--full-bleed .gallery__grid--two {
+  justify-content: center;
+  grid-template-columns: repeat(2, minmax(min(100%, 320px), 640px));
+  max-width: 1320px;
+  margin-inline: auto;
+}
+@media (min-width: 1360px) {
+  .gallery--full-bleed .gallery__grid--two {
+    grid-template-columns: 640px 640px;
+  }
+}
+
+.gallery__item-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.gallery__item-link:hover { box-shadow: var(--shadow-xl); transform: translateY(-2px); }
+.gallery__item-link:focus-visible { outline: 2px solid var(--red-600); outline-offset: 2px; }
+.gallery__item-link--btn { cursor: pointer; border: none; background: none; width: 100%; text-align: left; }
 .gallery__item {
   margin: 0;
   border-radius: var(--radius-lg);
@@ -648,6 +826,7 @@ ul, ol { list-style: none; }
   flex-direction: column;
 }
 .gallery__item img {
+  max-height: 355px;
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
@@ -678,6 +857,317 @@ ul, ol { list-style: none; }
   line-height: 1.45;
 }
 .gallery__text:empty { display: none; }
+
+/* Модальное окно проектов */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal[hidden] { display: none; }
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+.modal__box {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2xl);
+  max-width: 36rem;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+}
+.modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.modal__close:hover { background: var(--gray-200); }
+.modal__close::after { content: '×'; }
+.modal__title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+  padding-right: 2.5rem;
+}
+.modal__lead {
+  font-size: 1rem;
+  color: var(--gray-600);
+  margin-bottom: 1.5rem;
+}
+.modal__grid {
+  display: grid;
+  gap: 1rem;
+  min-height: 60px;
+}
+@media (min-width: 480px) {
+  .modal__grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+
+/* Модалка проектов: проекты ремонта (фото или До/После с переключателем) */
+.modal__box--projects { max-width: 44rem; }
+.projects-modal__remont { margin-top: 0.5rem; }
+.projects-modal__remont-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 1rem;
+}
+.remont-projects__grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 480px) {
+  .remont-projects__grid { grid-template-columns: repeat(2, 1fr); }
+}
+.remont-item { margin: 0; }
+.remont-item__img-wrap,
+.remont-item__switch-wrap {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--gray-100);
+  aspect-ratio: 4 / 3;
+}
+.remont-item__img-wrap img,
+.remont-item__switch-wrap img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.remont-item__switch-wrap {
+  position: relative;
+}
+.remont-item__switch-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.remont-item__switch-wrap .remont-item__switch-img--before { opacity: 1; }
+.remont-item__switch-wrap.is-after .remont-item__switch-img--before { opacity: 0; }
+.remont-item__switch-wrap.is-after .remont-item__switch-img--after { opacity: 1; }
+.remont-item__switch-btns {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+.remont-item__switch-btn {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: 1px solid var(--gray-300);
+  background: #fff;
+  color: var(--gray-700);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.remont-item__switch-btn:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-400);
+}
+.remont-item__switch-btn.is-active {
+  background: var(--blue-600);
+  border-color: var(--blue-600);
+  color: #fff;
+}
+.remont-item__caption {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin: 0.35rem 0 0;
+  line-height: 1.4;
+}
+
+/* Карточка проекта в списке (клик открывает модалку детали) */
+.remont-projects__grid--cards { margin-top: 0.5rem; }
+.remont-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  padding: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+.remont-card:hover {
+  border-color: var(--blue-500);
+  box-shadow: var(--shadow-md);
+}
+.remont-card:focus-visible {
+  outline: 2px solid var(--blue-600);
+  outline-offset: 2px;
+}
+.remont-card__thumb {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--gray-100);
+}
+.remont-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.remont-card__caption {
+  display: block;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+.project-content-source { display: none !important; }
+.modal__box--project-detail { max-width: 44rem; }
+.project-detail__body { margin-top: 0.5rem; }
+.project-detail__pairs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.project-detail__pairs .remont-item { margin: 0; }
+
+/* Модалка новости: дата, заголовок, тело */
+.modal__date {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  margin-bottom: 0.5rem;
+}
+.modal__body {
+  font-size: 1rem;
+  color: var(--gray-700);
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+.modal--news .modal__box { max-width: 42rem; }
+
+/* ========== Новости ========== */
+.news__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .news__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .news__grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+}
+.news-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 1.5rem;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  background: #fff;
+}
+.news-card__date {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.news-card__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+.news-card__excerpt {
+  font-size: 0.9375rem;
+  color: var(--gray-600);
+  line-height: 1.45;
+  margin: 0;
+}
+.news__actions {
+  text-align: center;
+  margin: 2rem 0 0;
+}
+.news__body-sources {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.news__body-source { display: none; }
+
+/* Модалка «Все новости»: список, сортировка по дате */
+.modal--all-news .modal__box {
+  max-width: 42rem;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+.all-news-modal__list {
+  overflow-y: auto;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.all-news-modal__item {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+.all-news-modal__item:last-child { padding-bottom: 0; border-bottom: none; }
+.all-news-modal__date {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  margin: 0 0 0.35rem;
+}
+.all-news-modal__item-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+.all-news-modal__item-body {
+  font-size: 1rem;
+  color: var(--gray-700);
+  line-height: 1.6;
+  margin: 0;
+}
 
 /* Подписи под фото в блоке «О нас» */
 .about__img-caption {
@@ -827,6 +1317,64 @@ ul, ol { list-style: none; }
 .contact-form__submit { margin-top: 0.5rem; height: 3.5rem; border-radius: 0.75rem; font-weight: 700; box-shadow: var(--shadow-lg); }
 .contact-form__hint { font-size: 0.75rem; color: var(--gray-500); text-align: center; }
 .contact__aside { display: flex; flex-direction: column; gap: 1.5rem; }
+
+/* Обёртка блока конгресса: сине-белый фон */
+.congress-section {
+  background: linear-gradient(180deg, #d4e8f7 0%, #e8f2fa 35%, #f5f9fc 70%, #fff 100%);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  margin: -0.25rem 0;
+}
+
+.congress-promo {
+  background: #fff;
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem 2.25rem;
+  box-shadow: var(--shadow-md);
+}
+
+.congress-promo__title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+.congress-promo__lead {
+  font-size: 1.0625rem;
+  color: var(--gray-700);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+}
+
+.congress-promo__btn {
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.0625rem;
+}
+
+.congress-promo__date {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0.35rem;
+}
+
+.congress-promo__place {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 1.25rem;
+}
+
+.congress-promo__support {
+  font-size: 0.9375rem;
+  color: var(--gray-500);
+  margin: 0;
+}
+
 .partner-badge {
   background: var(--green-600);
   color: #fff;

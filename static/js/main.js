@@ -141,4 +141,198 @@
     });
   });
 
+  // ---------- Лайтбокс сертификатов руководителя ----------
+  var certLightbox = document.getElementById('cert-lightbox');
+  var certLightboxImg = document.getElementById('cert-lightbox-img');
+  var certLightboxClose = document.getElementById('cert-lightbox-close');
+  var certLightboxBackdrop = document.getElementById('cert-lightbox-backdrop');
+  if (certLightbox && certLightboxImg) {
+    function openCertLightbox(src) {
+      certLightboxImg.src = src;
+      certLightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCertLightbox() {
+      certLightbox.hidden = true;
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.leader-cert').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var full = this.getAttribute('data-full');
+        if (full) openCertLightbox(full);
+      });
+    });
+    if (certLightboxClose) certLightboxClose.addEventListener('click', closeCertLightbox);
+    if (certLightboxBackdrop) certLightboxBackdrop.addEventListener('click', closeCertLightbox);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && certLightbox && !certLightbox.hidden) closeCertLightbox();
+    });
+  }
+
+  // ---------- Модальное окно «Все новости» (сортировка по дате создания) ----------
+  var allNewsModal = document.getElementById('all-news-modal');
+  var allNewsModalList = document.getElementById('all-news-modal-list');
+  var allNewsModalClose = document.getElementById('all-news-modal-close');
+  var allNewsModalBackdrop = document.getElementById('all-news-modal-backdrop');
+  var openAllNewsBtn = document.getElementById('open-all-news-modal');
+  if (allNewsModal && allNewsModalList) {
+    function openAllNewsModal() {
+      var cards = document.querySelectorAll('.news-card[data-news-sort][data-news-body-id]');
+      var items = [];
+      cards.forEach(function (card) {
+        var bodyId = card.getAttribute('data-news-body-id');
+        var body = '';
+        if (bodyId) {
+          var bodyEl = document.getElementById(bodyId);
+          if (bodyEl) body = bodyEl.textContent.trim();
+        }
+        items.push({
+          title: card.getAttribute('data-news-title') || '',
+          date: card.getAttribute('data-news-date') || '',
+          sort: card.getAttribute('data-news-sort') || '0000-00-00',
+          body: body
+        });
+      });
+      items.sort(function (a, b) { return b.sort.localeCompare(a.sort); });
+      allNewsModalList.innerHTML = '';
+      items.forEach(function (item) {
+        var article = document.createElement('article');
+        article.className = 'all-news-modal__item';
+        article.innerHTML =
+          '<p class="all-news-modal__date">' + escapeHtml(item.date) + '</p>' +
+          '<h3 class="all-news-modal__item-title">' + escapeHtml(item.title) + '</h3>' +
+          '<div class="all-news-modal__item-body">' + escapeHtml(item.body) + '</div>';
+        allNewsModalList.appendChild(article);
+      });
+      allNewsModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      if (allNewsModalClose) allNewsModalClose.focus();
+    }
+    function closeAllNewsModal() {
+      allNewsModal.hidden = true;
+      document.body.style.overflow = '';
+    }
+    function escapeHtml(text) {
+      var div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    if (openAllNewsBtn) openAllNewsBtn.addEventListener('click', openAllNewsModal);
+    if (allNewsModalClose) allNewsModalClose.addEventListener('click', closeAllNewsModal);
+    if (allNewsModalBackdrop) allNewsModalBackdrop.addEventListener('click', closeAllNewsModal);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && allNewsModal && !allNewsModal.hidden) closeAllNewsModal();
+    });
+  }
+
+  // ---------- Модальное окно проектов (по клику на карточку услуги) ----------
+  var projectsModal = document.getElementById('projects-modal');
+  var projectsModalTitle = document.getElementById('projects-modal-title');
+  var projectsModalLead = document.getElementById('projects-modal-lead');
+  var projectsModalBeforeAfter = document.getElementById('projects-modal-before-after');
+  var projectsModalClose = document.getElementById('projects-modal-close');
+  var projectsModalBackdrop = document.getElementById('projects-modal-backdrop');
+  var closeProjectsModal = function () {};
+  if (projectsModal && projectsModalTitle && projectsModalLead) {
+    function openProjectsModal(title, lead, modalId) {
+      projectsModalTitle.textContent = title || '';
+      projectsModalLead.textContent = lead || '';
+      if (projectsModalBeforeAfter) {
+        if (modalId === 'gallery2') {
+          projectsModalBeforeAfter.hidden = false;
+        } else {
+          projectsModalBeforeAfter.hidden = true;
+        }
+      }
+      projectsModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      projectsModalClose.focus();
+    }
+    closeProjectsModal = function () {
+      projectsModal.hidden = true;
+      document.body.style.overflow = '';
+      if (projectDetailModal && !projectDetailModal.hidden) {
+        projectDetailModal.hidden = true;
+        if (projectDetailBody) projectDetailBody.innerHTML = '';
+      }
+    };
+    document.querySelectorAll('[data-open-projects-modal]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var title = this.getAttribute('data-modal-title');
+        var lead = this.getAttribute('data-modal-lead');
+        var modalId = this.getAttribute('data-modal-id');
+        openProjectsModal(title, lead, modalId);
+      });
+    });
+    if (projectsModalClose) projectsModalClose.addEventListener('click', closeProjectsModal);
+    if (projectsModalBackdrop) projectsModalBackdrop.addEventListener('click', closeProjectsModal);
+  }
+
+  // ---------- Переключатель До/После (вызывать для контейнера) ----------
+  function bindRemontToggles(container) {
+    if (!container) return;
+    container.querySelectorAll('[data-remont-toggle]').forEach(function (figure) {
+      var wrap = figure.querySelector('.remont-item__switch-wrap');
+      var btns = figure.querySelectorAll('.remont-item__switch-btn');
+      if (!wrap || !btns.length) return;
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var show = this.getAttribute('data-show');
+          btns.forEach(function (b) { b.classList.remove('is-active'); });
+          this.classList.add('is-active');
+          if (show === 'after') {
+            wrap.classList.add('is-after');
+          } else {
+            wrap.classList.remove('is-after');
+          }
+        });
+      });
+    });
+  }
+  bindRemontToggles(document);
+
+  // ---------- Модалка детали проекта (по клику на карточку проекта) ----------
+  var projectDetailModal = document.getElementById('project-detail-modal');
+  var projectDetailTitle = document.getElementById('project-detail-title');
+  var projectDetailBody = document.getElementById('project-detail-body');
+  var projectDetailClose = document.getElementById('project-detail-close');
+  var projectDetailBackdrop = document.getElementById('project-detail-backdrop');
+  document.querySelectorAll('[data-open-project-detail]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = this.getAttribute('data-project-id');
+      var caption = this.querySelector('.remont-card__caption');
+      var titleText = caption ? caption.textContent.trim() : 'Проект';
+      var source = document.getElementById('project-content-' + id);
+      if (!projectDetailModal || !projectDetailBody) return;
+      if (source) {
+        projectDetailBody.innerHTML = source.innerHTML;
+        bindRemontToggles(projectDetailBody);
+      } else {
+        projectDetailBody.innerHTML = '';
+      }
+      if (projectDetailTitle) projectDetailTitle.textContent = titleText;
+      projectDetailModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      if (projectDetailClose) projectDetailClose.focus();
+    });
+  });
+  function closeProjectDetailModal() {
+    if (projectDetailModal) {
+      projectDetailModal.hidden = true;
+      if (projectDetailBody) projectDetailBody.innerHTML = '';
+      // overflow не сбрасываем — под ней может быть открыта модалка списка проектов
+    }
+  }
+  if (projectDetailClose) projectDetailClose.addEventListener('click', closeProjectDetailModal);
+  if (projectDetailBackdrop) projectDetailBackdrop.addEventListener('click', closeProjectDetailModal);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (projectDetailModal && !projectDetailModal.hidden) {
+        closeProjectDetailModal();
+      } else if (projectsModal && !projectsModal.hidden) {
+        closeProjectsModal();
+      }
+    }
+  });
+
 })();

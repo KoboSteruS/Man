@@ -30,7 +30,7 @@
         <div class="header__actions">
           <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}" class="header__phone" aria-label="Позвонить">
             <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            {{ content.get('phone', '+7 (900) 455-10-10') }}
+            {{ content.get('phone', '+7 921 727 5869') }}
           </a>
           <a href="#contact" class="btn btn--primary btn--pill">Консультация</a>
         </div>
@@ -41,7 +41,7 @@
           <a href="#services" class="header__mobile-link">Услуги</a>
           <a href="#properties" class="header__mobile-link">Недвижимость</a>
           <a href="#contact" class="header__mobile-link">Контакты</a>
-          <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}" class="header__mobile-phone">{{ content.get('phone', '+7 (900) 455-10-10') }}</a>
+          <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}" class="header__mobile-phone">{{ content.get('phone', '+7 921 727 5869') }}</a>
           <a href="#contact" class="btn btn--primary btn--block btn--lg header__mobile-cta">Консультация</a>
         </nav>
       </div>
@@ -70,7 +70,7 @@
               {{ content.get('hero_cta', 'Найти недвижимость') }}
               <svg class="icon icon--ml" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
-            <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}" class="btn btn--outline-white btn--lg btn--pill">{{ content.get('phone', '+7 (900) 455-10-10') }}</a>
+            <a href="#contact" class="btn btn--outline-white btn--lg btn--pill">Оставить заявку</a>
           </div>
           <div class="hero__stats">
             <div class="stat-card">
@@ -124,11 +124,7 @@
                   {% if content.get('about3_caption') %}<p class="about__img-caption">{{ content.get('about3_caption') }}</p>{% endif %}
                 </div>
               </div>
-              <div class="about__floating-badge">
-                <span class="about__floating-value">27</span>
-                <span class="about__floating-label">Лет Опыта</span>
               </div>
-            </div>
             <div class="about__text">
               <p class="about__p">{{ content.get('about_p1', 'ООО «Московское агентство недвижимости» в Петрозаводске создавалось для того, чтобы люди могли комфортно, с чувством безопасности и защищенности решать свои вопросы, связанные с недвижимостью.') }}</p>
               <p class="about__p">{{ content.get('about_p2', 'Высокие стандарты качества оказания риэлторских услуг – наша ежедневная насущная забота. Надежная команда профессионалов риэлторского дела накопила опыт трудных побед и ответственных решений.') }}</p>
@@ -160,6 +156,47 @@
             <div class="quote-banner__icon"></div>
             <p class="quote-banner__text">{{ content.get('about_quote', 'ПРОФЕССИОНАЛИЗМ И ПОРЯДОЧНОСТЬ – ОСНОВНЫЕ ПРИНЦИПЫ НАШЕЙ РАБОТЫ И СОТРУДНИЧЕСТВА!') }}</p>
           </blockquote>
+
+          <!-- Руководитель: фото слева, ФИО/должность и сертификаты справа -->
+          <div class="about-leader" id="about-leader">
+            <div class="about-leader__photo">
+              {% set leader_img = content.get('leader_image', 'certificate/Ludmila.jpg') %}{% set leader_path = 'img/' ~ leader_img if '/' in leader_img else 'img/leader/' ~ leader_img %}
+              <img src="{{ url_for('static', filename=leader_path) }}" alt="{{ content.get('leader_name', '') }}" width="400" height="500" loading="lazy" decoding="async" />
+            </div>
+            <div class="about-leader__info">
+              <h3 class="about-leader__name">{{ content.get('leader_name', '') }}</h3>
+              <p class="about-leader__position">{{ content.get('leader_position', '') }}</p>
+              {% if content.get('leader_info') %}<p class="about-leader__info-text">{{ content.get('leader_info') }}</p>{% endif %}
+              <div class="about-leader__certs" aria-label="Сертификаты">
+                {% set c1 = content.get('leader_cert1_image', 'certificate/cert1.jpg') %}{% set p1 = 'img/' ~ c1 if '/' in c1 else 'img/certificate/' ~ c1 %}
+                <button type="button" class="leader-cert" data-full="{{ url_for('static', filename=p1) }}" aria-label="Сертификат 1">
+                  <img src="{{ url_for('static', filename=p1) }}" alt="Сертификат 1" width="80" height="110" loading="lazy" decoding="async" />
+                </button>
+                {% set c2 = content.get('leader_cert2_image', 'certificate/cert2.jpg') %}{% set p2 = 'img/' ~ c2 if '/' in c2 else 'img/certificate/' ~ c2 %}
+                <button type="button" class="leader-cert" data-full="{{ url_for('static', filename=p2) }}" aria-label="Сертификат 2">
+                  <img src="{{ url_for('static', filename=p2) }}" alt="Сертификат 2" width="80" height="110" loading="lazy" decoding="async" />
+                </button>
+                {% set c3 = content.get('leader_cert3_image', 'certificate/cert3.jpg') %}{% set p3 = 'img/' ~ c3 if '/' in c3 else 'img/certificate/' ~ c3 %}
+                <button type="button" class="leader-cert" data-full="{{ url_for('static', filename=p3) }}" aria-label="Сертификат 3">
+                  <img src="{{ url_for('static', filename=p3) }}" alt="Сертификат 3" width="80" height="110" loading="lazy" decoding="async" />
+                </button>
+                {% set c4 = content.get('leader_cert4_image', 'certificate/cert4.jpg') %}{% set p4 = 'img/' ~ c4 if '/' in c4 else 'img/certificate/' ~ c4 %}
+                <button type="button" class="leader-cert" data-full="{{ url_for('static', filename=p4) }}" aria-label="Сертификат 4">
+                  <img src="{{ url_for('static', filename=p4) }}" alt="Сертификат 4" width="80" height="110" loading="lazy" decoding="async" />
+                </button>
+                {% set c5 = content.get('leader_cert5_image', 'certificate/cert5.jpg') %}{% set p5 = 'img/' ~ c5 if '/' in c5 else 'img/certificate/' ~ c5 %}
+                <button type="button" class="leader-cert" data-full="{{ url_for('static', filename=p5) }}" aria-label="Сертификат 5">
+                  <img src="{{ url_for('static', filename=p5) }}" alt="Сертификат 5" width="80" height="110" loading="lazy" decoding="async" />
+                </button>
+              </div>
+              <div class="about-leader__cert-main">
+                {% set cm = content.get('leader_cert_main_image', 'certificate/cert_big.png') %}{% set pm = 'img/' ~ cm if '/' in cm else 'img/certificate/' ~ cm %}
+                <button type="button" class="leader-cert leader-cert--main" data-full="{{ url_for('static', filename=pm) }}" aria-label="Основной сертификат">
+                  <img src="{{ url_for('static', filename=pm) }}" alt="Сертификат" width="480" height="320" loading="lazy" decoding="async" />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -305,56 +342,69 @@
             </h2>
             <p class="section__lead">{{ content.get('gallery_lead', 'Актуальные объекты недвижимости в Петрозаводске, Карелии, Москве и за рубежом') }}</p>
           </div>
-          <div class="gallery">
-            <div class="gallery__grid">
-              <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery1_image', 'gallery1.jpg')) }}" alt="{{ content.get('gallery1_caption', '') }}" loading="lazy" decoding="async" />
-                <figcaption class="gallery__caption-wrap">
-                  <span class="gallery__caption">{{ content.get('gallery1_caption', '') }}</span>
-                  {% if content.get('gallery1_text') %}<span class="gallery__text">{{ content.get('gallery1_text') }}</span>{% endif %}
-                </figcaption>
-              </figure>
-              <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery2_image', 'gallery2.jpg')) }}" alt="{{ content.get('gallery2_caption', '') }}" loading="lazy" decoding="async" />
-                <figcaption class="gallery__caption-wrap">
-                  <span class="gallery__caption">{{ content.get('gallery2_caption', '') }}</span>
-                  {% if content.get('gallery2_text') %}<span class="gallery__text">{{ content.get('gallery2_text') }}</span>{% endif %}
-                </figcaption>
-              </figure>
-              <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery3_image', 'gallery3.jpg')) }}" alt="{{ content.get('gallery3_caption', '') }}" loading="lazy" decoding="async" />
-                <figcaption class="gallery__caption-wrap">
-                  <span class="gallery__caption">{{ content.get('gallery3_caption', '') }}</span>
-                  {% if content.get('gallery3_text') %}<span class="gallery__text">{{ content.get('gallery3_text') }}</span>{% endif %}
-                </figcaption>
-              </figure>
-              <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery4_image', 'gallery4.jpg')) }}" alt="{{ content.get('gallery4_caption', '') }}" loading="lazy" decoding="async" />
-                <figcaption class="gallery__caption-wrap">
-                  <span class="gallery__caption">{{ content.get('gallery4_caption', '') }}</span>
-                  {% if content.get('gallery4_text') %}<span class="gallery__text">{{ content.get('gallery4_text') }}</span>{% endif %}
-                </figcaption>
-              </figure>
-              <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery5_image', 'gallery5.jpg')) }}" alt="{{ content.get('gallery5_caption', '') }}" loading="lazy" decoding="async" />
-                <figcaption class="gallery__caption-wrap">
-                  <span class="gallery__caption">{{ content.get('gallery5_caption', '') }}</span>
-                  {% if content.get('gallery5_text') %}<span class="gallery__text">{{ content.get('gallery5_text') }}</span>{% endif %}
-                </figcaption>
-              </figure>
-              <figure class="gallery__item">
-                <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery6_image', 'gallery6.jpg')) }}" alt="{{ content.get('gallery6_caption', '') }}" loading="lazy" decoding="async" />
-                <figcaption class="gallery__caption-wrap">
-                  <span class="gallery__caption">{{ content.get('gallery6_caption', '') }}</span>
-                  {% if content.get('gallery6_text') %}<span class="gallery__text">{{ content.get('gallery6_text') }}</span>{% endif %}
-                </figcaption>
-              </figure>
+          <div class="gallery gallery--full-bleed">
+            <div class="gallery__grid gallery__grid--two">
+              <button type="button" class="gallery__item-link gallery__item-link--btn" data-open-projects-modal data-modal-id="gallery1" data-modal-title="{{ content.get('gallery1_caption', 'Дачные и земельные участки') }}" data-modal-lead="Проекты по этой услуге. Здесь можно добавить карточки объектов." aria-label="Открыть проекты: {{ content.get('gallery1_caption', 'Дачные и земельные участки') }}">
+                <figure class="gallery__item">
+                  <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery2_image', 'gallery2.jpg')) }}" alt="{{ content.get('gallery1_caption', '') }}" loading="lazy" decoding="async" />
+                  <figcaption class="gallery__caption-wrap">
+                    <span class="gallery__caption">{{ content.get('gallery1_caption', 'Дачные и земельные участки') }}</span>
+                    {% if content.get('gallery1_text') %}<span class="gallery__text">{{ content.get('gallery1_text') }}</span>{% endif %}
+                  </figcaption>
+                </figure>
+              </button>
+              <button type="button" class="gallery__item-link gallery__item-link--btn" data-open-projects-modal data-modal-id="gallery2" data-modal-title="{{ content.get('gallery2_caption', 'Квартира под ключ — ремонт') }}" data-modal-lead="Проекты по этой услуге. Здесь можно добавить карточки объектов." aria-label="Открыть проекты: {{ content.get('gallery2_caption', 'Квартира под ключ — ремонт') }}">
+                <figure class="gallery__item">
+                  <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery5_image', 'gallery5.jpg')) }}" alt="{{ content.get('gallery2_caption', '') }}" loading="lazy" decoding="async" />
+                  <figcaption class="gallery__caption-wrap">
+                    <span class="gallery__caption">{{ content.get('gallery2_caption', 'Квартира под ключ — ремонт') }}</span>
+                    {% if content.get('gallery2_text') %}<span class="gallery__text">{{ content.get('gallery2_text') }}</span>{% endif %}
+                  </figcaption>
+                </figure>
+              </button>
             </div>
           </div>
+
           <div class="cta-banner cta-banner--blue">
             <h3 class="cta-banner__title">{{ content.get('cta_title', 'Не нашли подходящий вариант?') }}</h3>
             <p class="cta-banner__text">{{ content.get('cta_text', 'Оставьте заявку, и мы подберём идеальную недвижимость за 24 часа') }}</p>
             <a href="#contact" class="btn btn--white btn--lg btn--pill">{{ content.get('cta_btn', 'Оставить заявку') }}</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Новости -->
+      <section id="news" class="section section--white" aria-labelledby="news-title">
+        <div class="container">
+          <div class="section__head">
+            <span class="badge badge--outline">{{ content.get('news_badge', 'Новости') }}</span>
+            <h2 id="news-title" class="section__title">{{ content.get('news_title', 'Актуальные новости и события') }}</h2>
+            <p class="section__lead">{{ content.get('news_lead', 'Полезная информация о рынке недвижимости и жизни агентства') }}</p>
+          </div>
+          <div class="news__grid">
+            <div class="news-card" data-news-title="{{ content.get('news1_title', '') }}" data-news-date="{{ content.get('news1_date', '') }}" data-news-sort="{{ content.get('news1_sort_date', '') }}" data-news-body-id="news1-body">
+              <span class="news-card__date">{{ content.get('news1_date', '') }}</span>
+              <h3 class="news-card__title">{{ content.get('news1_title', '') }}</h3>
+              <p class="news-card__excerpt">{{ content.get('news1_excerpt', '') }}</p>
+            </div>
+            <div class="news-card" data-news-title="{{ content.get('news2_title', '') }}" data-news-date="{{ content.get('news2_date', '') }}" data-news-sort="{{ content.get('news2_sort_date', '') }}" data-news-body-id="news2-body">
+              <span class="news-card__date">{{ content.get('news2_date', '') }}</span>
+              <h3 class="news-card__title">{{ content.get('news2_title', '') }}</h3>
+              <p class="news-card__excerpt">{{ content.get('news2_excerpt', '') }}</p>
+            </div>
+            <div class="news-card" data-news-title="{{ content.get('news3_title', '') }}" data-news-date="{{ content.get('news3_date', '') }}" data-news-sort="{{ content.get('news3_sort_date', '') }}" data-news-body-id="news3-body">
+              <span class="news-card__date">{{ content.get('news3_date', '') }}</span>
+              <h3 class="news-card__title">{{ content.get('news3_title', '') }}</h3>
+              <p class="news-card__excerpt">{{ content.get('news3_excerpt', '') }}</p>
+            </div>
+          </div>
+          <p class="news__actions">
+            <button type="button" class="btn btn--green btn--lg" id="open-all-news-modal" aria-label="Открыть все новости">{{ content.get('news_btn_all', 'Все новости') }}</button>
+          </p>
+          <div class="news__body-sources" aria-hidden="true">
+            <div id="news1-body" class="news__body-source">{{ content.get('news1_text', '') }}</div>
+            <div id="news2-body" class="news__body-source">{{ content.get('news2_text', '') }}</div>
+            <div id="news3-body" class="news__body-source">{{ content.get('news3_text', '') }}</div>
           </div>
         </div>
       </section>
@@ -436,7 +486,7 @@
             <div class="contact-card">
               <div class="contact-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
               <h3 class="contact-card__title">Телефон</h3>
-              <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}" class="contact-card__link">{{ content.get('phone', '+7 (900) 455-10-10') }}</a>
+              <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}" class="contact-card__link">{{ content.get('phone', '+7 921 727 5869') }}</a>
             </div>
             <div class="contact-card">
               <div class="contact-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></div>
@@ -473,10 +523,15 @@
               </form>
             </div>
             <div class="contact__aside">
-              <div class="partner-badge">
-                <div class="partner-badge__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-4 4h12l-4-4"/><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/></svg></div>
-                <h3 class="partner-badge__title">{{ content.get('partner_title', 'Официальный партнёр') }}</h3>
-                <p class="partner-badge__text">{{ content.get('partner_text', 'С 2012 года агентство является первым и единственным в Республике Карелия официальным партнёром и аккредитованным представителем «Дрийм Хоум» ЕООД (Болгария).') }}</p>
+              <div class="congress-section">
+                <div class="congress-promo">
+                  <h3 class="congress-promo__title">{{ content.get('congress_title', 'Всероссийский Жилищный конгресс') }}</h3>
+                  <p class="congress-promo__lead">{{ content.get('congress_lead', 'Масштабное, креативное, легендарное мероприятие на рынке недвижимости России. Выступления топовых спикеров, мощный нетворкинг, обширная деловая и культурная программа') }}</p>
+                  <a href="{{ content.get('congress_url', 'https://russiacongress.ru') }}" class="btn btn--primary btn--block congress-promo__btn" target="_blank" rel="noopener noreferrer">{{ content.get('congress_btn', 'Регистрация') }}</a>
+                  <p class="congress-promo__date">{{ content.get('congress_date', '13–17 апреля 2026') }}</p>
+                  <p class="congress-promo__place">{{ content.get('congress_place', 'Экспофорум, Санкт-Петербург') }}</p>
+                  <p class="congress-promo__support">При поддержке Минстрой России</p>
+                </div>
               </div>
               <div class="benefits-mini">
                 <div class="benefits-mini__item"><span class="benefits-mini__value">24ч</span><span class="benefits-mini__label">Быстрый ответ</span></div>
@@ -514,6 +569,7 @@
               <li><a href="#about">О компании</a></li>
               <li><a href="#services">Услуги</a></li>
               <li><a href="#properties">Недвижимость</a></li>
+              <li><a href="#news">Новости</a></li>
               <li><a href="#contact">Контакты</a></li>
             </ul>
           </div>
@@ -533,7 +589,7 @@
             <h3 class="footer__heading">Контакты</h3>
             <ul class="footer__contacts">
               <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> {{ content.get('address', 'г. Петрозаводск, ул. Ровио, д. 38') }}</li>
-              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}">{{ content.get('phone', '+7 (900) 455-10-10') }}</a></li>
+              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:{{ content.get('phone', '') | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}">{{ content.get('phone', '+7 921 727 5869') }}</a></li>
               <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg> <a href="mailto:{{ content.get('email', '') }}">{{ content.get('email', 'ptz.man@yandex.ru') }}</a></li>
             </ul>
           </div>
@@ -553,6 +609,146 @@
   <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true" hidden>
     <span class="toast__icon"></span>
     <span class="toast__message"></span>
+  </div>
+
+  <!-- Модальное окно новости -->
+  <!-- Модальное окно «Все новости» (сортировка по дате) -->
+  <div class="modal modal--all-news" id="all-news-modal" role="dialog" aria-modal="true" aria-labelledby="all-news-modal-title" hidden>
+    <div class="modal__backdrop" id="all-news-modal-backdrop"></div>
+    <div class="modal__box" role="document">
+      <button type="button" class="modal__close" id="all-news-modal-close" aria-label="Закрыть"></button>
+      <h2 id="all-news-modal-title" class="modal__title">Все новости</h2>
+      <div id="all-news-modal-list" class="all-news-modal__list"></div>
+    </div>
+  </div>
+
+  <!-- Модальное окно проектов по услуге (для ремонта — блок До/После) -->
+  <div class="modal" id="projects-modal" role="dialog" aria-modal="true" aria-labelledby="projects-modal-title" hidden>
+    <div class="modal__backdrop" id="projects-modal-backdrop"></div>
+    <div class="modal__box modal__box--projects" role="document">
+      <button type="button" class="modal__close" id="projects-modal-close" aria-label="Закрыть"></button>
+      <h2 id="projects-modal-title" class="modal__title"></h2>
+      <p class="modal__lead" id="projects-modal-lead"></p>
+      <div id="projects-modal-before-after" class="projects-modal__remont" hidden>
+        <h3 class="projects-modal__remont-title">{{ content.get('remont_projects_title', 'Проекты ремонта') }}</h3>
+        <div class="remont-projects__grid remont-projects__grid--cards">
+          <!-- Первый проект: фото из img/firstproject (3 пары До/После) -->
+          <button type="button" class="remont-card" data-open-project-detail data-project-id="first" aria-label="Открыть проект: Первый проект">
+            <span class="remont-card__thumb"><img src="{{ url_for('static', filename='img/firstproject/before1.jpg') }}" alt="" loading="lazy" /></span>
+            <span class="remont-card__caption">Первый проект</span>
+          </button>
+          {% for i in range(1, 7) %}
+          {% set slot_type = content.get('project_remont_' ~ i ~ '_type', 'photo') %}
+          {% set single_img = content.get('project_remont_' ~ i ~ '_image') %}
+          {% set before_img = content.get('project_remont_' ~ i ~ '_before_image') %}
+          {% set after_img = content.get('project_remont_' ~ i ~ '_after_image') %}
+          {% set caption = content.get('project_remont_' ~ i ~ '_caption') %}
+          {% if slot_type == 'photo' and single_img %}
+          <button type="button" class="remont-card" data-open-project-detail data-project-id="remont-{{ i }}" aria-label="Открыть проект: {{ caption or 'Проект' }}">
+            <span class="remont-card__thumb"><img src="{{ url_for('static', filename='img/remont/' ~ single_img) }}" alt="" loading="lazy" /></span>
+            <span class="remont-card__caption">{{ caption or 'Проект' }}</span>
+          </button>
+          {% elif slot_type == 'before_after' and (before_img or after_img) %}
+          {% set thumb_src = url_for('static', filename='img/remont/' ~ (before_img or after_img)) %}
+          <button type="button" class="remont-card" data-open-project-detail data-project-id="remont-{{ i }}" aria-label="Открыть проект: {{ caption or 'Проект' }}">
+            <span class="remont-card__thumb"><img src="{{ thumb_src }}" alt="" loading="lazy" /></span>
+            <span class="remont-card__caption">{{ caption or 'Проект' }}</span>
+          </button>
+          {% endif %}
+          {% endfor %}
+        </div>
+        <!-- Скрытый контент для модалки детали: первый проект (3 пары из firstproject) -->
+        <div id="project-content-first" class="project-content-source" hidden>
+          <div class="project-detail__pairs">
+            <figure class="remont-item remont-item--before-after" data-remont-toggle>
+              <div class="remont-item__switch-wrap">
+                <img class="remont-item__switch-img remont-item__switch-img--before" src="{{ url_for('static', filename='img/firstproject/before1.jpg') }}" alt="До" loading="lazy" />
+                <img class="remont-item__switch-img remont-item__switch-img--after" src="{{ url_for('static', filename='img/firstproject/after1.jpg') }}" alt="После" loading="lazy" />
+              </div>
+              <div class="remont-item__switch-btns" role="group" aria-label="Показать До или После">
+                <button type="button" class="remont-item__switch-btn is-active" data-show="before">До</button>
+                <button type="button" class="remont-item__switch-btn" data-show="after">После</button>
+              </div>
+            </figure>
+            <figure class="remont-item remont-item--before-after" data-remont-toggle>
+              <div class="remont-item__switch-wrap">
+                <img class="remont-item__switch-img remont-item__switch-img--before" src="{{ url_for('static', filename='img/firstproject/before2.jpg') }}" alt="До" loading="lazy" />
+                <img class="remont-item__switch-img remont-item__switch-img--after" src="{{ url_for('static', filename='img/firstproject/after2.jpg') }}" alt="После" loading="lazy" />
+              </div>
+              <div class="remont-item__switch-btns" role="group" aria-label="Показать До или После">
+                <button type="button" class="remont-item__switch-btn is-active" data-show="before">До</button>
+                <button type="button" class="remont-item__switch-btn" data-show="after">После</button>
+              </div>
+            </figure>
+            <figure class="remont-item remont-item--before-after" data-remont-toggle>
+              <div class="remont-item__switch-wrap">
+                <img class="remont-item__switch-img remont-item__switch-img--before" src="{{ url_for('static', filename='img/firstproject/before3.jpg') }}" alt="До" loading="lazy" />
+                <img class="remont-item__switch-img remont-item__switch-img--after" src="{{ url_for('static', filename='img/firstproject/after3.jpg') }}" alt="После" loading="lazy" />
+              </div>
+              <div class="remont-item__switch-btns" role="group" aria-label="Показать До или После">
+                <button type="button" class="remont-item__switch-btn is-active" data-show="before">До</button>
+                <button type="button" class="remont-item__switch-btn" data-show="after">После</button>
+              </div>
+            </figure>
+          </div>
+        </div>
+        {% for i in range(1, 7) %}
+        {% set slot_type = content.get('project_remont_' ~ i ~ '_type', 'photo') %}
+        {% set single_img = content.get('project_remont_' ~ i ~ '_image') %}
+        {% set before_img = content.get('project_remont_' ~ i ~ '_before_image') %}
+        {% set after_img = content.get('project_remont_' ~ i ~ '_after_image') %}
+        {% set caption = content.get('project_remont_' ~ i ~ '_caption') %}
+        {% if slot_type == 'photo' and single_img %}
+        <div id="project-content-remont-{{ i }}" class="project-content-source" hidden>
+          <figure class="remont-item remont-item--photo">
+            <div class="remont-item__img-wrap">
+              <img src="{{ url_for('static', filename='img/remont/' ~ single_img) }}" alt="{{ caption or 'Проект' }}" loading="lazy" />
+            </div>
+            {% if caption %}<figcaption class="remont-item__caption">{{ caption }}</figcaption>{% endif %}
+          </figure>
+        </div>
+        {% elif slot_type == 'before_after' and (before_img or after_img) %}
+        <div id="project-content-remont-{{ i }}" class="project-content-source" hidden>
+          <figure class="remont-item remont-item--before-after" data-remont-toggle>
+            <div class="remont-item__switch-wrap{{ ' is-after' if after_img and not before_img else '' }}">
+              {% if before_img %}
+              <img class="remont-item__switch-img remont-item__switch-img--before" src="{{ url_for('static', filename='img/remont/' ~ before_img) }}" alt="До" loading="lazy" />
+              {% endif %}
+              {% if after_img %}
+              <img class="remont-item__switch-img remont-item__switch-img--after" src="{{ url_for('static', filename='img/remont/' ~ after_img) }}" alt="После" loading="lazy" />
+              {% endif %}
+            </div>
+            <div class="remont-item__switch-btns" role="group" aria-label="Показать До или После">
+              {% if before_img %}<button type="button" class="remont-item__switch-btn is-active" data-show="before">До</button>{% endif %}
+              {% if after_img %}<button type="button" class="remont-item__switch-btn{{ ' is-active' if not before_img else '' }}" data-show="after">После</button>{% endif %}
+            </div>
+            {% if caption %}<figcaption class="remont-item__caption">{{ caption }}</figcaption>{% endif %}
+          </figure>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div class="modal__grid" id="projects-modal-grid">
+        <!-- Карточки проектов при необходимости -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Модалка детали проекта (один проект — фото или До/После) -->
+  <div class="modal" id="project-detail-modal" role="dialog" aria-modal="true" aria-labelledby="project-detail-title" hidden>
+    <div class="modal__backdrop" id="project-detail-backdrop"></div>
+    <div class="modal__box modal__box--project-detail" role="document">
+      <button type="button" class="modal__close" id="project-detail-close" aria-label="Закрыть"></button>
+      <h2 id="project-detail-title" class="modal__title"></h2>
+      <div id="project-detail-body" class="project-detail__body"></div>
+    </div>
+  </div>
+
+  <!-- Лайтбокс для сертификатов руководителя -->
+  <div class="lightbox" id="cert-lightbox" role="dialog" aria-modal="true" aria-label="Сертификат в полном размере" hidden>
+    <button type="button" class="lightbox__close" id="cert-lightbox-close" aria-label="Закрыть"></button>
+    <div class="lightbox__backdrop" id="cert-lightbox-backdrop"></div>
+    <img class="lightbox__img" id="cert-lightbox-img" src="" alt="Сертификат" />
   </div>
 
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>

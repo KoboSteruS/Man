@@ -120,6 +120,53 @@
       </div>
 
       <div class="admin__section">
+        <h2>Руководитель (блок после цитаты)</h2>
+        <p style="font-size:0.875rem; color:#6b7280; margin-bottom:1rem;">Слева — фото, справа — ФИО и должность, внизу справа — 6 сертификатов (по клику открываются в полном размере).</p>
+        <div class="admin__grid">
+          <div><label for="leader_name">ФИО</label><input type="text" id="leader_name" name="leader_name" value="{{ content.get('leader_name', '') }}" placeholder="Иванова Мария Ивановна" /></div>
+          <div><label for="leader_position">Должность</label><input type="text" id="leader_position" name="leader_position" value="{{ content.get('leader_position', '') }}" placeholder="Генеральный директор" /></div>
+          <div style="grid-column: 1 / -1;"><label for="leader_info">Доп. информация (членство в союзах и т.п.)</label><textarea id="leader_info" name="leader_info" rows="2" placeholder="Например: действительный член Союза «Национальная палата недвижимости»">{{ content.get('leader_info', '') }}</textarea></div>
+        </div>
+        <div class="admin__upload admin__slot" style="margin-top:1rem;">
+          {% set leader_img = content.get('leader_image', 'certificate/Ludmila.jpg') %}{% set leader_path = 'img/' ~ leader_img if '/' in leader_img else 'img/leader/' ~ leader_img %}
+          <img class="admin__upload-preview" id="preview-leader" src="{{ url_for('static', filename=leader_path) }}" alt="Фото руководителя" onerror="this.style.display='none'" />
+          <div class="admin__upload-controls">
+            <input type="file" id="file-leader" accept="image/jpeg,image/png" />
+            <button type="button" class="btn btn--primary btn--small" data-upload-slot="leader">Заменить фото</button>
+            <span class="admin__msg" id="msg-leader" aria-live="polite"></span>
+          </div>
+        </div>
+        <p style="font-size:0.875rem; color:#6b7280; margin:1rem 0 0.5rem;">Сертификаты (5 мелких + 1 большой снизу):</p>
+        <div class="admin__grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+          {% for i in [1, 2, 3, 4, 5] %}
+          {% set cert_img = content.get('leader_cert' ~ i ~ '_image', 'certificate/cert' ~ i ~ '.jpg') %}
+          {% set cert_path = 'img/' ~ cert_img if '/' in cert_img else 'img/certificate/' ~ cert_img %}
+          <div class="admin__slot">
+            <div class="admin__upload">
+              <img class="admin__upload-preview" id="preview-leader_cert{{ i }}" src="{{ url_for('static', filename=cert_path) }}" alt="Сертификат {{ i }}" style="width:80px;height:110px;object-fit:cover;" onerror="this.style.display='none'" />
+              <div class="admin__upload-controls">
+                <input type="file" id="file-leader_cert{{ i }}" accept="image/jpeg,image/png" />
+                <button type="button" class="btn btn--primary btn--small" data-upload-slot="leader_cert{{ i }}">Заменить</button>
+                <span class="admin__msg" id="msg-leader_cert{{ i }}" aria-live="polite"></span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% set cert_main_img = content.get('leader_cert_main_image', 'certificate/cert_big.png') %}
+        {% set cert_main_path = 'img/' ~ cert_main_img if '/' in cert_main_img else 'img/certificate/' ~ cert_main_img %}
+        <div class="admin__upload admin__slot" style="margin-top:1rem;">
+          <img class="admin__upload-preview" id="preview-leader_cert_main" src="{{ url_for('static', filename=cert_main_path) }}" alt="Большой сертификат" style="width:120px;height:165px;object-fit:cover;" onerror="this.style.display='none'" />
+          <div class="admin__upload-controls">
+            <label>Один большой сертификат (снизу под мелкими)</label>
+            <input type="file" id="file-leader_cert_main" accept="image/jpeg,image/png" />
+            <button type="button" class="btn btn--primary btn--small" data-upload-slot="leader_cert_main">Заменить</button>
+            <span class="admin__msg" id="msg-leader_cert_main" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin__section">
         <h2>Услуги</h2>
         <div class="admin__grid">
           <div><label for="services_badge">Бейдж</label><input type="text" id="services_badge" name="services_badge" value="{{ content.get('services_badge', '') }}" /></div>
@@ -156,6 +203,48 @@
       </div>
 
       <div class="admin__section">
+        <h2>Проекты ремонта</h2>
+        <p style="font-size:0.875rem; color:#6b7280; margin-bottom:1rem;">Отображается в модалке при клике на «Квартира под ключ — ремонт». Для каждого слота выберите тип: <strong>Просто фото</strong> (одно фото) или <strong>До/После</strong> (два фото, переключаются на сайте).</p>
+        <div style="margin-bottom:1rem;"><label for="remont_projects_title">Заголовок блока</label><input type="text" id="remont_projects_title" name="remont_projects_title" value="{{ content.get('remont_projects_title', 'Проекты ремонта') }}" placeholder="Проекты ремонта" /></div>
+        {% for i in [1, 2, 3, 4, 5, 6] %}
+        <div class="admin__slot remont-slot" style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #e5e7eb;">
+          <p style="font-weight:600; margin-bottom:0.75rem;">Слот {{ i }}</p>
+          <div style="margin-bottom:0.75rem;">
+            <label>Тип</label>
+            <select name="project_remont_{{ i }}_type" id="project_remont_{{ i }}_type" class="remont-type-select" data-slot="{{ i }}">
+              <option value="photo" {{ 'selected' if content.get('project_remont_' ~ i ~ '_type', 'photo') == 'photo' else '' }}>Просто фото (одно фото)</option>
+              <option value="before_after" {{ 'selected' if content.get('project_remont_' ~ i ~ '_type') == 'before_after' else '' }}>До/После (два фото, переключаются)</option>
+            </select>
+          </div>
+          <div class="remont-fields remont-fields--photo" data-for="photo" style="margin-bottom:0.75rem;">
+            <label>Одно фото (для типа «Просто фото»)</label>
+            <img class="admin__upload-preview" id="preview-remont_{{ i }}_photo" src="{{ url_for('static', filename='img/remont/' ~ content.get('project_remont_' ~ i ~ '_image', '')) if content.get('project_remont_' ~ i ~ '_image') else '' }}" alt="Фото {{ i }}" style="width:100%; max-width:160px; height:auto; min-height:80px; background:#f3f4f6; border-radius:8px; display:block; margin-top:0.25rem;" onerror="this.style.display='none'" />
+            <input type="file" id="file-remont_{{ i }}_photo" accept="image/jpeg,image/png" style="margin-top:0.25rem;" />
+            <button type="button" class="btn btn--primary btn--small" data-upload-slot="remont_{{ i }}_photo" style="margin-top:0.25rem;">Загрузить фото</button>
+            <span class="admin__msg" id="msg-remont_{{ i }}_photo" aria-live="polite"></span>
+          </div>
+          <div class="remont-fields remont-fields--before-after" data-for="before_after" style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-bottom:0.75rem;">
+            <div>
+              <label>До (для типа «До/После»)</label>
+              <img class="admin__upload-preview" id="preview-remont_{{ i }}_before" src="{{ url_for('static', filename='img/remont/' ~ content.get('project_remont_' ~ i ~ '_before_image', '')) if content.get('project_remont_' ~ i ~ '_before_image') else '' }}" alt="До {{ i }}" style="width:100%; max-width:160px; height:auto; min-height:80px; background:#f3f4f6; border-radius:8px; display:block; margin-top:0.25rem;" onerror="this.style.display='none'" />
+              <input type="file" id="file-remont_{{ i }}_before" accept="image/jpeg,image/png" style="margin-top:0.25rem;" />
+              <button type="button" class="btn btn--primary btn--small" data-upload-slot="remont_{{ i }}_before" style="margin-top:0.25rem;">Загрузить «До»</button>
+              <span class="admin__msg" id="msg-remont_{{ i }}_before" aria-live="polite"></span>
+            </div>
+            <div>
+              <label>После (для типа «До/После»)</label>
+              <img class="admin__upload-preview" id="preview-remont_{{ i }}_after" src="{{ url_for('static', filename='img/remont/' ~ content.get('project_remont_' ~ i ~ '_after_image', '')) if content.get('project_remont_' ~ i ~ '_after_image') else '' }}" alt="После {{ i }}" style="width:100%; max-width:160px; height:auto; min-height:80px; background:#f3f4f6; border-radius:8px; display:block; margin-top:0.25rem;" onerror="this.style.display='none'" />
+              <input type="file" id="file-remont_{{ i }}_after" accept="image/jpeg,image/png" style="margin-top:0.25rem;" />
+              <button type="button" class="btn btn--primary btn--small" data-upload-slot="remont_{{ i }}_after" style="margin-top:0.25rem;">Загрузить «После»</button>
+              <span class="admin__msg" id="msg-remont_{{ i }}_after" aria-live="polite"></span>
+            </div>
+          </div>
+          <div style="margin-top:0.5rem;"><label for="project_remont_{{ i }}_caption">Подпись</label><input type="text" id="project_remont_{{ i }}_caption" name="project_remont_{{ i }}_caption" value="{{ content.get('project_remont_' ~ i ~ '_caption', '') }}" placeholder="Например: Кухня, ул. Ленина" style="width:100%; max-width:400px;" /></div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="admin__section">
         <h2>Преимущества</h2>
         <div class="admin__grid">
           <div><label for="advantages_badge">Бейдж</label><input type="text" id="advantages_badge" name="advantages_badge" value="{{ content.get('advantages_badge', '') }}" /></div>
@@ -165,13 +254,17 @@
       </div>
 
       <div class="admin__section">
-        <h2>Контакты (секция и партнёр)</h2>
+        <h2>Контакты и блок конгресса</h2>
         <div class="admin__grid">
           <div><label for="contact_badge">Бейдж</label><input type="text" id="contact_badge" name="contact_badge" value="{{ content.get('contact_badge', '') }}" /></div>
           <div><label for="contact_title">Заголовок</label><input type="text" id="contact_title" name="contact_title" value="{{ content.get('contact_title', '') }}" /></div>
           <div style="grid-column: 1 / -1;"><label for="contact_lead">Подзаголовок</label><input type="text" id="contact_lead" name="contact_lead" value="{{ content.get('contact_lead', '') }}" /></div>
-          <div><label for="partner_title">Заголовок блока партнёр</label><input type="text" id="partner_title" name="partner_title" value="{{ content.get('partner_title', '') }}" /></div>
-          <div style="grid-column: 1 / -1;"><label for="partner_text">Текст партнёр</label><textarea id="partner_text" name="partner_text" rows="2">{{ content.get('partner_text', '') }}</textarea></div>
+          <div><label for="congress_title">Заголовок (Жилищный конгресс)</label><input type="text" id="congress_title" name="congress_title" value="{{ content.get('congress_title', '') }}" /></div>
+          <div style="grid-column: 1 / -1;"><label for="congress_lead">Описание конгресса</label><textarea id="congress_lead" name="congress_lead" rows="2">{{ content.get('congress_lead', '') }}</textarea></div>
+          <div><label for="congress_btn">Текст кнопки</label><input type="text" id="congress_btn" name="congress_btn" value="{{ content.get('congress_btn', '') }}" /></div>
+          <div><label for="congress_url">Ссылка кнопки</label><input type="url" id="congress_url" name="congress_url" value="{{ content.get('congress_url', '') }}" placeholder="https://russiacongress.ru" /></div>
+          <div><label for="congress_date">Дата</label><input type="text" id="congress_date" name="congress_date" value="{{ content.get('congress_date', '') }}" /></div>
+          <div><label for="congress_place">Место</label><input type="text" id="congress_place" name="congress_place" value="{{ content.get('congress_place', '') }}" /></div>
         </div>
       </div>
 
@@ -258,9 +351,10 @@
             .then(function(r) { return r.json().then(function(j) { return { status: r.status, body: j }; }); })
             .then(function(res) {
               if (res.status === 200 && res.body.ok && res.body.filename) {
-                var base = slot === 'hero_bg' ? 'hero' : (slot.indexOf('about') !== -1 ? 'about' : 'gallery');
-                var prefix = 'img/' + (base === 'hero' ? 'hero/' : base === 'about' ? 'about/' : 'gallery/');
+                var prefix = (slot.indexOf('remont_') === 0) ? 'img/remont/' : (slot.indexOf('leader_cert') === 0 ? 'img/certificate/' : 'img/');
+                if (prefix === 'img/') prefix += slot === 'hero_bg' ? 'hero/' : (slot === 'leader' ? 'leader/' : (slot.indexOf('about') !== -1 ? 'about/' : 'gallery/'));
                 preview.src = '/static/' + prefix + res.body.filename + '?t=' + Date.now();
+                preview.style.display = 'block';
                 if (msgEl) { msgEl.textContent = 'Загружено'; msgEl.classList.remove('error'); }
                 input.value = '';
               } else {
@@ -271,6 +365,22 @@
               if (msgEl) { msgEl.textContent = 'Ошибка сети'; msgEl.classList.add('error'); }
             });
         });
+      });
+
+      // Показать/скрыть поля слотов ремонта по типу (Просто фото / До/После)
+      function updateRemontSlotVisibility(slotEl) {
+        var select = slotEl.querySelector('.remont-type-select');
+        var photoBlock = slotEl.querySelector('.remont-fields--photo');
+        var beforeAfterBlock = slotEl.querySelector('.remont-fields--before-after');
+        if (!select || !photoBlock || !beforeAfterBlock) return;
+        var type = select.value;
+        photoBlock.style.display = type === 'photo' ? 'block' : 'none';
+        beforeAfterBlock.style.display = type === 'before_after' ? 'grid' : 'none';
+      }
+      document.querySelectorAll('.remont-slot').forEach(function(slotEl) {
+        updateRemontSlotVisibility(slotEl);
+        var select = slotEl.querySelector('.remont-type-select');
+        if (select) select.addEventListener('change', function() { updateRemontSlotVisibility(slotEl); });
       });
     })();
   </script>

@@ -19,12 +19,51 @@ UPLOAD_SLOTS = {
     "gallery4": ("gallery", "gallery4"),
     "gallery5": ("gallery", "gallery5"),
     "gallery6": ("gallery", "gallery6"),
+    "leader": ("leader", "leader"),
+    "leader_cert1": ("certificate", "cert1"),
+    "leader_cert2": ("certificate", "cert2"),
+    "leader_cert3": ("certificate", "cert3"),
+    "leader_cert4": ("certificate", "cert4"),
+    "leader_cert5": ("certificate", "cert5"),
+    "leader_cert_main": ("certificate", "cert_big"),
+    "remont_1_photo": ("remont", "remont_1_photo"),
+    "remont_1_before": ("remont", "remont_1_before"),
+    "remont_1_after": ("remont", "remont_1_after"),
+    "remont_2_photo": ("remont", "remont_2_photo"),
+    "remont_2_before": ("remont", "remont_2_before"),
+    "remont_2_after": ("remont", "remont_2_after"),
+    "remont_3_photo": ("remont", "remont_3_photo"),
+    "remont_3_before": ("remont", "remont_3_before"),
+    "remont_3_after": ("remont", "remont_3_after"),
+    "remont_4_photo": ("remont", "remont_4_photo"),
+    "remont_4_before": ("remont", "remont_4_before"),
+    "remont_4_after": ("remont", "remont_4_after"),
+    "remont_5_photo": ("remont", "remont_5_photo"),
+    "remont_5_before": ("remont", "remont_5_before"),
+    "remont_5_after": ("remont", "remont_5_after"),
+    "remont_6_photo": ("remont", "remont_6_photo"),
+    "remont_6_before": ("remont", "remont_6_before"),
+    "remont_6_after": ("remont", "remont_6_after"),
 }
 
 # Ключ в content для имени файла (hero_bg -> hero_image, about1 -> about1_image, ...)
 def get_content_key(slot: str) -> str:
     if slot == "hero_bg":
         return "hero_image"
+    if slot == "leader":
+        return "leader_image"
+    if slot.startswith("leader_cert"):
+        return f"{slot}_image"
+    if slot.startswith("remont_"):
+        # remont_1_photo -> project_remont_1_image, remont_1_before -> project_remont_1_before_image, ...
+        parts = slot.split("_")
+        if len(parts) >= 3:
+            n = parts[1]
+            suffix = parts[2]  # photo, before, after
+            if suffix == "photo":
+                return f"project_remont_{n}_image"
+            if suffix in ("before", "after"):
+                return f"project_remont_{n}_{suffix}_image"
     return f"{slot}_image"
 
 
