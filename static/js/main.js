@@ -199,9 +199,7 @@
       items.forEach(function (item) {
         var article = document.createElement('article');
         article.className = 'all-news-modal__item';
-        var imgBlock = item.image ? '<img class="all-news-modal__item-img" src="' + escapeHtml(item.image) + '" alt="" width="640" height="360" loading="lazy" />' : '';
         article.innerHTML =
-          imgBlock +
           '<p class="all-news-modal__date">' + escapeHtml(item.date) + '</p>' +
           '<h3 class="all-news-modal__item-title">' + escapeHtml(item.title) + '</h3>' +
           '<div class="all-news-modal__item-body">' + escapeHtml(item.body) + '</div>';

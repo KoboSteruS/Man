@@ -384,21 +384,18 @@
           <div class="news__grid">
             {% set n1_img = content.get('news1_image') or 'gallery/gallery1.jpg' %}{% set n1_path = n1_img if '/' in n1_img else 'news/' ~ n1_img %}
             <div class="news-card" data-news-title="{{ content.get('news1_title', '') }}" data-news-date="{{ content.get('news1_date', '') }}" data-news-sort="{{ content.get('news1_sort_date', '') }}" data-news-body-id="news1-body" data-news-image="{{ url_for('static', filename='img/' ~ n1_path) }}">
-              <img class="news-card__img" src="{{ url_for('static', filename='img/' ~ n1_path) }}" alt="" width="400" height="240" loading="lazy" />
               <span class="news-card__date">{{ content.get('news1_date', '') }}</span>
               <h3 class="news-card__title">{{ content.get('news1_title', '') }}</h3>
               <p class="news-card__excerpt">{{ content.get('news1_excerpt', '') }}</p>
             </div>
             {% set n2_img = content.get('news2_image') or 'gallery/gallery2.jpg' %}{% set n2_path = n2_img if '/' in n2_img else 'news/' ~ n2_img %}
             <div class="news-card" data-news-title="{{ content.get('news2_title', '') }}" data-news-date="{{ content.get('news2_date', '') }}" data-news-sort="{{ content.get('news2_sort_date', '') }}" data-news-body-id="news2-body" data-news-image="{{ url_for('static', filename='img/' ~ n2_path) }}">
-              <img class="news-card__img" src="{{ url_for('static', filename='img/' ~ n2_path) }}" alt="" width="400" height="240" loading="lazy" />
               <span class="news-card__date">{{ content.get('news2_date', '') }}</span>
               <h3 class="news-card__title">{{ content.get('news2_title', '') }}</h3>
               <p class="news-card__excerpt">{{ content.get('news2_excerpt', '') }}</p>
             </div>
             {% set n3_img = content.get('news3_image') or 'gallery/gallery3.jpg' %}{% set n3_path = n3_img if '/' in n3_img else 'news/' ~ n3_img %}
             <div class="news-card" data-news-title="{{ content.get('news3_title', '') }}" data-news-date="{{ content.get('news3_date', '') }}" data-news-sort="{{ content.get('news3_sort_date', '') }}" data-news-body-id="news3-body" data-news-image="{{ url_for('static', filename='img/' ~ n3_path) }}">
-              <img class="news-card__img" src="{{ url_for('static', filename='img/' ~ n3_path) }}" alt="" width="400" height="240" loading="lazy" />
               <span class="news-card__date">{{ content.get('news3_date', '') }}</span>
               <h3 class="news-card__title">{{ content.get('news3_title', '') }}</h3>
               <p class="news-card__excerpt">{{ content.get('news3_excerpt', '') }}</p>
