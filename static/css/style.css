@@ -441,19 +441,34 @@ ul, ol { list-style: none; }
   align-items: start;
 }
 @media (min-width: 768px) {
-  .about-leader { grid-template-columns: minmax(340px, 520px) 1fr; }
+  .about-leader { grid-template-columns: minmax(240px, 320px) 1fr; }
+}
+.about-leader__col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
 }
 .about-leader__photo {
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--gray-100);
   aspect-ratio: 4 / 5;
+  max-width: 320px;
+  width: 100%;
 }
 .about-leader__photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+.about-leader__greeting {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin: 0;
+  line-height: 1.4;
 }
 .about-leader__name {
   font-size: 1.5rem;

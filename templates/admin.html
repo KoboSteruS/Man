@@ -126,6 +126,7 @@
           <div><label for="leader_name">ФИО</label><input type="text" id="leader_name" name="leader_name" value="{{ content.get('leader_name', '') }}" placeholder="Иванова Мария Ивановна" /></div>
           <div><label for="leader_position">Должность</label><input type="text" id="leader_position" name="leader_position" value="{{ content.get('leader_position', '') }}" placeholder="Генеральный директор" /></div>
           <div style="grid-column: 1 / -1;"><label for="leader_info">Доп. информация (членство в союзах и т.п.)</label><textarea id="leader_info" name="leader_info" rows="2" placeholder="Например: действительный член Союза «Национальная палата недвижимости»">{{ content.get('leader_info', '') }}</textarea></div>
+          <div><label for="leader_greeting">Подпись под фото</label><input type="text" id="leader_greeting" name="leader_greeting" value="{{ content.get('leader_greeting', 'Удачного 2026 года!') }}" placeholder="Удачного 2026 года!" /></div>
         </div>
         <div class="admin__upload admin__slot" style="margin-top:1rem;">
           {% set leader_img = content.get('leader_image', 'certificate/Ludmila.jpg') %}{% set leader_path = 'img/' ~ leader_img if '/' in leader_img else 'img/leader/' ~ leader_img %}

@@ -159,9 +159,12 @@
 
           <!-- Руководитель: фото слева, ФИО/должность и сертификаты справа -->
           <div class="about-leader" id="about-leader">
-            <div class="about-leader__photo">
-              {% set leader_img = content.get('leader_image', 'certificate/Ludmila.jpg') %}{% set leader_path = 'img/' ~ leader_img if '/' in leader_img else 'img/leader/' ~ leader_img %}
-              <img src="{{ url_for('static', filename=leader_path) }}" alt="{{ content.get('leader_name', '') }}" width="400" height="500" loading="lazy" decoding="async" />
+            <div class="about-leader__col">
+              <div class="about-leader__photo">
+                {% set leader_img = content.get('leader_image', 'certificate/Ludmila.jpg') %}{% set leader_path = 'img/' ~ leader_img if '/' in leader_img else 'img/leader/' ~ leader_img %}
+                <img src="{{ url_for('static', filename=leader_path) }}" alt="{{ content.get('leader_name', '') }}" width="320" height="400" loading="lazy" decoding="async" />
+              </div>
+              <p class="about-leader__greeting">{{ content.get('leader_greeting', 'Удачного 2026 года!') }}</p>
             </div>
             <div class="about-leader__info">
               <h3 class="about-leader__name">{{ content.get('leader_name', '') }}</h3>
@@ -344,21 +347,39 @@
           </div>
           <div class="gallery gallery--full-bleed">
             <div class="gallery__grid gallery__grid--two">
-              <button type="button" class="gallery__item-link gallery__item-link--btn" data-open-projects-modal data-modal-id="gallery1" data-modal-title="{{ content.get('gallery1_caption', 'Дачные и земельные участки') }}" data-modal-lead="Проекты по этой услуге. Здесь можно добавить карточки объектов." aria-label="Открыть проекты: {{ content.get('gallery1_caption', 'Дачные и земельные участки') }}">
+              <button type="button" class="gallery__item-link gallery__item-link--btn" data-open-projects-modal data-modal-id="gallery1" data-modal-title="{{ content.get('gallery1_caption', 'Дома, дачи и земельные участки') }}" data-modal-lead="Проекты по этой услуге. Здесь можно добавить карточки объектов." aria-label="Открыть проекты: {{ content.get('gallery1_caption', 'Дома, дачи и земельные участки') }}">
                 <figure class="gallery__item">
-                  <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery2_image', 'gallery2.jpg')) }}" alt="{{ content.get('gallery1_caption', '') }}" loading="lazy" decoding="async" />
+                  <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery1_image', 'gallery1.jpg')) }}" alt="{{ content.get('gallery1_caption', '') }}" loading="lazy" decoding="async" />
                   <figcaption class="gallery__caption-wrap">
-                    <span class="gallery__caption">{{ content.get('gallery1_caption', 'Квартиры и Дома, Дачи и Земельные участки') }}</span>
+                    <span class="gallery__caption">{{ content.get('gallery1_caption', 'Дома, дачи и земельные участки') }}</span>
                     {% if content.get('gallery1_text') %}<span class="gallery__text">{{ content.get('gallery1_text') }}</span>{% endif %}
                   </figcaption>
                 </figure>
               </button>
               <button type="button" class="gallery__item-link gallery__item-link--btn" data-open-projects-modal data-modal-id="gallery2" data-modal-title="{{ content.get('gallery2_caption', 'Квартира под ключ — ремонт') }}" data-modal-lead="Проекты по этой услуге. Здесь можно добавить карточки объектов." aria-label="Открыть проекты: {{ content.get('gallery2_caption', 'Квартира под ключ — ремонт') }}">
                 <figure class="gallery__item">
-                  <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery5_image', 'gallery5.jpg')) }}" alt="{{ content.get('gallery2_caption', '') }}" loading="lazy" decoding="async" />
+                  <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery2_image', 'gallery2.jpg')) }}" alt="{{ content.get('gallery2_caption', '') }}" loading="lazy" decoding="async" />
                   <figcaption class="gallery__caption-wrap">
                     <span class="gallery__caption">{{ content.get('gallery2_caption', 'Квартира под ключ — ремонт') }}</span>
                     {% if content.get('gallery2_text') %}<span class="gallery__text">{{ content.get('gallery2_text') }}</span>{% endif %}
+                  </figcaption>
+                </figure>
+              </button>
+              <button type="button" class="gallery__item-link gallery__item-link--btn" data-open-projects-modal data-modal-id="gallery3" data-modal-title="{{ content.get('gallery3_caption', 'Квартиры, комнаты — продажа') }}" data-modal-lead="Проекты по этой услуге. Здесь можно добавить карточки объектов." aria-label="Открыть проекты: {{ content.get('gallery3_caption', 'Квартиры, комнаты — продажа') }}">
+                <figure class="gallery__item">
+                  <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery3_image', 'gallery3.jpg')) }}" alt="{{ content.get('gallery3_caption', '') }}" loading="lazy" decoding="async" />
+                  <figcaption class="gallery__caption-wrap">
+                    <span class="gallery__caption">{{ content.get('gallery3_caption', 'Квартиры, комнаты — продажа') }}</span>
+                    {% if content.get('gallery3_text') %}<span class="gallery__text">{{ content.get('gallery3_text') }}</span>{% endif %}
+                  </figcaption>
+                </figure>
+              </button>
+              <button type="button" class="gallery__item-link gallery__item-link--btn" data-open-projects-modal data-modal-id="gallery4" data-modal-title="{{ content.get('gallery4_caption', 'Аренда') }}" data-modal-lead="Проекты по этой услуге. Здесь можно добавить карточки объектов." aria-label="Открыть проекты: {{ content.get('gallery4_caption', 'Аренда') }}">
+                <figure class="gallery__item">
+                  <img src="{{ url_for('static', filename='img/gallery/' ~ content.get('gallery4_image', 'gallery4.jpg')) }}" alt="{{ content.get('gallery4_caption', '') }}" loading="lazy" decoding="async" />
+                  <figcaption class="gallery__caption-wrap">
+                    <span class="gallery__caption">{{ content.get('gallery4_caption', 'Аренда') }}</span>
+                    {% if content.get('gallery4_text') %}<span class="gallery__text">{{ content.get('gallery4_text') }}</span>{% endif %}
                   </figcaption>
                 </figure>
               </button>
