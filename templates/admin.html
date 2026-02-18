@@ -245,6 +245,39 @@
       </div>
 
       <div class="admin__section">
+        <h2>Новости</h2>
+        <div class="admin__grid" style="grid-column: 1 / -1;">
+          <div><label for="news_badge">Бейдж</label><input type="text" id="news_badge" name="news_badge" value="{{ content.get('news_badge', '') }}" /></div>
+          <div><label for="news_title">Заголовок секции</label><input type="text" id="news_title" name="news_title" value="{{ content.get('news_title', '') }}" /></div>
+          <div style="grid-column: 1 / -1;"><label for="news_lead">Подзаголовок</label><input type="text" id="news_lead" name="news_lead" value="{{ content.get('news_lead', '') }}" /></div>
+          <div><label for="news_btn_all">Текст кнопки «Все новости»</label><input type="text" id="news_btn_all" name="news_btn_all" value="{{ content.get('news_btn_all', '') }}" /></div>
+        </div>
+        {% for i in [1, 2, 3] %}
+        <div class="admin__slot" style="margin-top:1rem;">
+          <h3 style="font-size:1rem; margin-bottom:0.75rem;">Новость {{ i }}</h3>
+          <div class="admin__upload">
+            {% set news_img = content.get('news' ~ i ~ '_image', 'gallery/gallery' ~ i ~ '.jpg') %}
+            {% set news_img_path = 'img/' ~ news_img if '/' in news_img else 'img/news/' ~ news_img %}
+            <img class="admin__upload-preview" id="preview-news{{ i }}" src="{{ url_for('static', filename=news_img_path) }}" alt="Новость {{ i }}" onerror="this.src='{{ url_for('static', filename='img/gallery/gallery' ~ i ~ '.jpg') }}'" />
+            <div class="admin__upload-controls">
+              <input type="file" id="file-news{{ i }}" accept="image/jpeg,image/png" />
+              <button type="button" class="btn btn--primary btn--small" data-upload-slot="news{{ i }}">Загрузить фото</button>
+              <span class="admin__msg" id="msg-news{{ i }}" aria-live="polite"></span>
+            </div>
+          </div>
+          <input type="hidden" id="news{{ i }}_image" name="news{{ i }}_image" value="{{ content.get('news' ~ i ~ '_image', '') }}" />
+          <div class="admin__grid" style="margin-top:0.75rem;">
+            <div><label for="news{{ i }}_title">Заголовок</label><input type="text" id="news{{ i }}_title" name="news{{ i }}_title" value="{{ content.get('news' ~ i ~ '_title', '') }}" /></div>
+            <div><label for="news{{ i }}_date">Дата (как показывать)</label><input type="text" id="news{{ i }}_date" name="news{{ i }}_date" value="{{ content.get('news' ~ i ~ '_date', '') }}" placeholder="5 февраля 2026" /></div>
+            <div><label for="news{{ i }}_sort_date">Дата для сортировки (ГГГГ-ММ-ДД)</label><input type="text" id="news{{ i }}_sort_date" name="news{{ i }}_sort_date" value="{{ content.get('news' ~ i ~ '_sort_date', '') }}" placeholder="2026-02-05" /></div>
+            <div style="grid-column: 1 / -1;"><label for="news{{ i }}_excerpt">Краткое описание (анонс)</label><input type="text" id="news{{ i }}_excerpt" name="news{{ i }}_excerpt" value="{{ content.get('news' ~ i ~ '_excerpt', '') }}" /></div>
+            <div style="grid-column: 1 / -1;"><label for="news{{ i }}_text">Полный текст</label><textarea id="news{{ i }}_text" name="news{{ i }}_text" rows="3">{{ content.get('news' ~ i ~ '_text', '') }}</textarea></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="admin__section">
         <h2>Преимущества</h2>
         <div class="admin__grid">
           <div><label for="advantages_badge">Бейдж</label><input type="text" id="advantages_badge" name="advantages_badge" value="{{ content.get('advantages_badge', '') }}" /></div>
@@ -352,11 +385,14 @@
             .then(function(res) {
               if (res.status === 200 && res.body.ok && res.body.filename) {
                 var prefix = (slot.indexOf('remont_') === 0) ? 'img/remont/' : (slot.indexOf('leader_cert') === 0 ? 'img/certificate/' : 'img/');
-                if (prefix === 'img/') prefix += slot === 'hero_bg' ? 'hero/' : (slot === 'leader' ? 'leader/' : (slot.indexOf('about') !== -1 ? 'about/' : 'gallery/'));
+                if (prefix === 'img/') prefix += slot === 'hero_bg' ? 'hero/' : (slot === 'leader' ? 'leader/' : (slot === 'news1' || slot === 'news2' || slot === 'news3' ? 'news/' : (slot.indexOf('about') !== -1 ? 'about/' : 'gallery/')));
                 preview.src = '/static/' + prefix + res.body.filename + '?t=' + Date.now();
                 preview.style.display = 'block';
                 if (msgEl) { msgEl.textContent = 'Загружено'; msgEl.classList.remove('error'); }
                 input.value = '';
+                var imgKey = slot + '_image';
+                var hidden = document.querySelector('input[name="' + imgKey + '"]');
+                if (hidden) hidden.value = res.body.filename;
               } else {
                 if (msgEl) { msgEl.textContent = res.body.error || 'Ошибка загрузки'; msgEl.classList.add('error'); }
               }

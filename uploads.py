@@ -44,6 +44,9 @@ UPLOAD_SLOTS = {
     "remont_6_photo": ("remont", "remont_6_photo"),
     "remont_6_before": ("remont", "remont_6_before"),
     "remont_6_after": ("remont", "remont_6_after"),
+    "news1": ("news", "news1"),
+    "news2": ("news", "news2"),
+    "news3": ("news", "news3"),
 }
 
 # Ключ в content для имени файла (hero_bg -> hero_image, about1 -> about1_image, ...)
@@ -64,6 +67,8 @@ def get_content_key(slot: str) -> str:
                 return f"project_remont_{n}_image"
             if suffix in ("before", "after"):
                 return f"project_remont_{n}_{suffix}_image"
+    if slot in ("news1", "news2", "news3"):
+        return f"{slot}_image"
     return f"{slot}_image"
 
 
